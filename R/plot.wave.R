@@ -1,6 +1,6 @@
 plot.wave <- function(fd, puls, member = T, medoids = T, lty = 3, ...) {
   if (member) {
-    plot(fd, col=puls$Membership, lty, ...)
+    plot.fd(fd, col=puls$Membership, lty, ...)
   } else plot(fd, col="gray", ...)
 
   if (medoids) {
