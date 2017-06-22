@@ -1,5 +1,5 @@
-plot.wave <- function(fd, member = T, medians = T, ...) {
+plot.wave <- function(fd, puls, member = T, medians = T, ...) {
   if (member) {
-    plot(yfd$fd, col=PULS4$Membership, ...)
-  } else plot(yfd$fd, ...)
+    plot(fd, col=puls$Membership, ...)
+  } else plot(fd, ...)
 }
