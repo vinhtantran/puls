@@ -1,4 +1,4 @@
-PULS<-function(toclust.fd, method="PAM",intervals=c(0,1),distmethod=NULL, labels=toclust.fd$fdnames[2]$reps, nclusters=length(toclust.fd$fdnames[2]$reps), minbucket=2, minsplit=4){
+PULS<-function(toclust.fd, method="PAM",intervals=c(0,1),distmethod="fast", labels=toclust.fd$fdnames[2]$reps, nclusters=length(toclust.fd$fdnames[2]$reps), minbucket=2, minsplit=4){
 
   #MG - 11/24/2014
 
@@ -339,18 +339,33 @@ med <- function(members,Dist){
   }
 }
 
-fdistmatrix=function(yfd=yfd,subrange=subrange){ #Eventually modify to allow unions of subintervals to be defined
+fdistmatrix=function(yfd=yfd,subrange=subrange,distmethod="fast"){ #Eventually modify to allow unions of subintervals to be defined
   N=length(yfd$fdnames$reps)
   #Convert to an fdata object evaluated just over the range defined in subrange:
-  nargs=length(yfd$basis$params+2)*5 #Create a higher resolution grid to predict and then remake fdata objects on reduced domains
-  t_high=seq(from=subrange[1],to=subrange[2],length.out=nargs)
+  Ydist=matrix(0,nrow=N,ncol=N)
 
-  predfd=predict(yfd,t_high)
-  yfdata=fdata(mdata=t(predfd),argvals=t_high)
+  if (distmethod == "fast") {
+    nargs=length(yfd$basis$params+2)*5 #Create a higher resolution grid to predict and then remake fdata objects on reduced domains
+    t_high=seq(from=subrange[1],to=subrange[2],length.out=nargs)
 
-  Ydist=as.matrix(as.dist(metric.lp(yfdata),diag=T,upper=T))
+    predfd=predict(yfd,t_high)
+    yfdata=fdata(mdata=t(predfd),argvals=t_high)
 
-  return(Ydist)
+    Ydist=as.matrix(as.dist(metric.lp(yfdata),diag=T,upper=T))
+  } else {
+    for (j1 in 1:(N-1)){
+      fdfirst=yfd[j1]
+      for (i1 in (j1+1):N){
+        fdsecond=yfd[i1]
+        diff1=minus.fd(fdfirst,fdsecond)
+        Ydist[j1,i1]=sqrt(inprod(diff1,diff1,rng=subrange));
+      }
+    }
+
+    YdistF=as.matrix(as.dist(t(Ydist),upper=T,diag=T))
+  }
+
+  return(YdistF)
 }
 
 
