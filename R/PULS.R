@@ -1,4 +1,7 @@
-PULS<-function(toclust.fd, method="PAM",intervals=c(0,1),distmethod="fast", labels=toclust.fd$fdnames[2]$reps, nclusters=length(toclust.fd$fdnames[2]$reps), minbucket=2, minsplit=4){
+PULS<-function(toclust.fd, method="PAM",intervals=c(0,1),distmethod=c("usc", "manual"), labels=toclust.fd$fdnames[2]$reps, nclusters=length(toclust.fd$fdnames[2]$reps), minbucket=2, minsplit=4){
+
+  # Tan Tran, 6/28/17, check the distmethod arguments
+  distmethod <- match.arg(distmethod)
 
   #MG - 11/24/2014
 
@@ -344,7 +347,7 @@ fdistmatrix=function(yfd=yfd,subrange=subrange,distmethod="fast"){ #Eventually m
   #Convert to an fdata object evaluated just over the range defined in subrange:
   Ydist=matrix(0,nrow=N,ncol=N)
 
-  if (distmethod == "fast") {
+  if (distmethod == "usc") {
     nargs=length(yfd$basis$params+2)*5 #Create a higher resolution grid to predict and then remake fdata objects on reduced domains
     t_high=seq(from=subrange[1],to=subrange[2],length.out=nargs)
 
