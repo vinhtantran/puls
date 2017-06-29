@@ -1,16 +1,16 @@
 plot.wave <- function(fd, puls, member = T, medoids = T, ...) {
-  mbs <- unique(puls$Membership)
 
   if (member && !medoids) {
     plot.fd(fd$fd, col=puls$Membership,...)
-  } else plot(fd, col="gray", ...)
+  } else if (!member && !medoids) plot(fd, col="gray", ...)
 
   if (medoids) {
+    meds <- puls$frame$medoid[puls$frame$var == "<leaf>"]
     lty.lst <- rep(3, length(puls$Membership))
-    lty.lst[puls$frame$medoid[mbs]] <- 1
+    lty.lst[meds] <- 1
 
     lwd.lst <- rep(1, length(puls$Membership))
-    lwd.lst[puls$frame$medoid[mbs]] <- 3
+    lwd.lst[meds] <- 3
 
     plot(fd$fd, col=puls$Membership - min(puls$Membership) + 1, lty=lty.lst, lwd=lwd.lst)
   }
