@@ -2,7 +2,7 @@ plot.wave <- function(fd, puls, member = T, medoids = T, ...) {
   mbs <- unique(puls$Membership)
 
   if (member) {
-    plot.fd(fd$fd, col=puls$Membership, ...)
+    plot.fd(fd$fd, col=puls$Membership,...)
   } else plot(fd, col="gray", ...)
 
   if (medoids) {
