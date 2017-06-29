@@ -1,12 +1,21 @@
-plot.wave <- function(fd, puls, member = T, medoids = T, lty = 3, ...) {
+plot.wave <- function(fd, puls, member = T, medoids = T, ...) {
+  mbs <- unique(puls$Membership)
+
   if (member) {
     plot.fd(fd, col=puls$Membership, lty, ...)
   } else plot(fd, col="gray", ...)
 
   if (medoids) {
-    member <- unique(puls$Membership)
+    lty.lst <- rep(3, length(puls$Membership))
+    lty.lst[puls$frame$medoid[member]] <- 1
+
+    lwd.lst <- rep(1, length(puls$Membership))
+    lwd.lst[puls$frame$medoid[member]] <- 3
+
+    plot(fd$fd, col=puls$Membership - min(puls$Membership) + 1, lty=lty.lst, lwd=lwd.lst)
+
     for (i in member) {
-      lines(1:dim(fd$argvals)[1], fd$y[,puls$frame$medoid[i]], type = "l", col=i, lwd=2)
+      lines(1:365, fd$y[,puls$frame$medoid[i]], type = "l", col=i, lwd=2)
     }
 
   }
