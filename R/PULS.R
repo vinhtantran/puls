@@ -3,7 +3,7 @@ PULS<-function(toclust.fd, method="PAM",intervals=c(0,1),spliton=NULL,distmethod
   # Tan Tran, 6/28/17, check the distmethod arguments
   distmethod <- match.arg(distmethod)
 
-  if (is.null(spliton)) spliton <- 1:length(intervals)
+  if (is.null(spliton)) spliton <- 1:nrow(intervals)
   #MG - 11/24/2014
 
   #Version of PULS that uses fda.usc distance functions under the hood for increased speed
