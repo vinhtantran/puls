@@ -1,8 +1,9 @@
-PULS<-function(toclust.fd, method="PAM",intervals=c(0,1),distmethod=c("usc", "manual"), labels=toclust.fd$fdnames[2]$reps, nclusters=length(toclust.fd$fdnames[2]$reps), minbucket=2, minsplit=4){
+PULS<-function(toclust.fd, method="PAM",intervals=c(0,1),spliton=NULL,distmethod=c("usc", "manual"), labels=toclust.fd$fdnames[2]$reps, nclusters=length(toclust.fd$fdnames[2]$reps), minbucket=2, minsplit=4){
 
   # Tan Tran, 6/28/17, check the distmethod arguments
   distmethod <- match.arg(distmethod)
 
+  if (is.null(spliton)) spliton <- 1:length(intervals)
   #MG - 11/24/2014
 
   #Version of PULS that uses fda.usc distance functions under the hood for increased speed
@@ -67,7 +68,7 @@ PULS<-function(toclust.fd, method="PAM",intervals=c(0,1),distmethod=c("usc", "ma
 
 
   while((sum(.Cluster_frame$var=="<leaf>") < nclusters)){
-    check <- checkem(toclust.fd,Dist, dsubs,dsubsnames,weights,minbucket,minsplit) #passing the responses, the global distance matrix, the subreg distance matrices, and names of intervals
+    check <- checkem(toclust.fd,Dist, dsubs,dsubsnames,weights,minbucket,minsplit,spliton) #passing the responses, the global distance matrix, the subreg distance matrices, and names of intervals
     if(check==0){break}
   }
 
@@ -230,7 +231,7 @@ splitter<-function(splitrow,toclust.fd,Dist,dsubs,dsubsname,weights){
 ## We are keeping all of the information regarding which clusters we have in
 ## frame. At this point, we want to find the terminal node with the greatest change in inertia and bipartion it.
 
-FindSplit <- function(frame,row,toclust.fd,Dist,dsubs,dsubsname,warn,weights,minbucket,minsplit){  #passes distance matrices and names of subregions - MG
+FindSplit <- function(frame,row,toclust.fd,Dist,dsubs,dsubsname,warn,weights,minbucket,minsplit,spliton){  #passes distance matrices and names of subregions - MG
 
   bycol<-numeric()
 
@@ -252,7 +253,9 @@ FindSplit <- function(frame,row,toclust.fd,Dist,dsubs,dsubsname,warn,weights,min
 
   ##For each subregion generate possible cut, calculate the inertia.
 
-  for(i in (1:length(dsubsname))){
+  # Tan 6/29/17, modified to split on a restricted set of intervals
+  # for(i in (1:length(dsubsname))){
+  for(i in spliton){
 
     # Tan 9/29, rewrite to make it easier to read
     # If #obs satisfies minsplit then split further, otherwise not bother to do anything
@@ -301,12 +304,12 @@ FindSplit <- function(frame,row,toclust.fd,Dist,dsubs,dsubsname,warn,weights,min
 }
 
 
-checkem<-function(toclust.fd,Dist, dsubs,dsubsname,weights,minbucket,minsplit){
+checkem<-function(toclust.fd,Dist, dsubs,dsubsname,weights,minbucket,minsplit,spliton){
 
   ## Current terminal nodes
   candidates<-which(.Cluster_frame$var == '<leaf>' & is.na(.Cluster_frame$bipartsplitrow))
   ## Split the best one. Return to Nada which never gets output.
-  Nada <- sapply(candidates,function(x)FindSplit(.Cluster_frame,x,toclust.fd,Dist, dsubs,dsubsname,warn,weights,minbucket,minsplit))
+  Nada <- sapply(candidates,function(x)FindSplit(.Cluster_frame,x,toclust.fd,Dist, dsubs,dsubsname,warn,weights,minbucket,minsplit,spliton))
 
   ## See which ones are left.
   candidates2 <- which(.Cluster_frame$var == '<leaf>')
