@@ -69,7 +69,7 @@ PULS<-function(toclust.fd, method=c("pam", "ward"),intervals=c(0,1),spliton=NULL
 
 
   while((sum(.Cluster_frame$var=="<leaf>") < nclusters)){
-    check <- checkem(toclust.fd,Dist, dsubs,dsubsnames,weights,minbucket,minsplit,spliton) #passing the responses, the global distance matrix, the subreg distance matrices, and names of intervals
+    check <- checkem(toclust.fd,Dist, dsubs,dsubsnames,weights,minbucket,minsplit,spliton,method) #passing the responses, the global distance matrix, the subreg distance matrices, and names of intervals
     if(check==0){break}
   }
 
@@ -309,7 +309,7 @@ FindSplit <- function(frame,row,toclust.fd,Dist,dsubs,dsubsname,warn,weights,min
 }
 
 
-checkem<-function(toclust.fd,Dist, dsubs,dsubsname,weights,minbucket,minsplit,spliton){
+checkem<-function(toclust.fd,Dist, dsubs,dsubsname,weights,minbucket,minsplit,spliton,method){
 
   ## Current terminal nodes
   candidates<-which(.Cluster_frame$var == '<leaf>' & is.na(.Cluster_frame$bipartsplitrow))
