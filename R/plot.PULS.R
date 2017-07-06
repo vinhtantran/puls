@@ -57,6 +57,7 @@ PULSplot<-function(x,toclust.fd, main, type, ylab, xlab,...,version){
     lines(toclust.fd[medoids[i]],col=clustid2[medoids[i]],lwd=2)
 
     }
+    par(mfrow=c(1,1))
   }
 
 }
