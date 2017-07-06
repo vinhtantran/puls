@@ -1,7 +1,8 @@
-PULS<-function(toclust.fd, method="PAM",intervals=c(0,1),spliton=NULL,distmethod=c("usc", "manual"), labels=toclust.fd$fdnames[2]$reps, nclusters=length(toclust.fd$fdnames[2]$reps), minbucket=2, minsplit=4){
+PULS<-function(toclust.fd, method=c("pam", "ward"),intervals=c(0,1),spliton=NULL,distmethod=c("usc", "manual"), labels=toclust.fd$fdnames[2]$reps, nclusters=length(toclust.fd$fdnames[2]$reps), minbucket=2, minsplit=4){
 
   # Tan Tran, 6/28/17, check the distmethod arguments
   distmethod <- match.arg(distmethod)
+  method <- match.arg(method)
 
   if (is.null(spliton)) spliton <- 1:nrow(intervals)
   #MG - 11/24/2014
@@ -152,10 +153,7 @@ getlevels <- function(sind,cats,varnames,frame,catnames,quali_ordered){
 }
 
 
-
-
-
-splitter<-function(splitrow,toclust.fd,Dist,dsubs,dsubsname,weights){
+splitter<-function(splitrow,toclust.fd,Dist,dsubs,dsubsname,weights,method){
   ## This function does the actual act of partitioning, given the row that is to be split "splitrow"
 
   number <- .Cluster_frame$number[splitrow]
@@ -167,7 +165,14 @@ splitter<-function(splitrow,toclust.fd,Dist,dsubs,dsubsname,weights){
   #Might be able to pass old split from FindSplit but also can just re-do clustering based on members and subregion that was optimal
   #This will slow algorithm unnecessarily to redo clustering here with large data sets!
 
-  cursplit<-pam(x=as.dist(dsubs[mems,mems,dsubsname==split[2]]),k=2)$clustering #Generate variable to use for splitting based on subregion i
+  # Tan, 7/6/17, add another choice of method, "ward".
+  cursplit <- as.numeric()
+  if (method == "pam") {
+    cursplit<-pam(x=as.dist(dsubs[mems,mems,dsubsname==split[2]]),k=2)$clustering #Generate variable to use for splitting based on subregion i
+  } else if (method == "ward") {
+    cursplit<-cutree(hclust(as.dist(dsubs[mems, mems, dsubsname == split[2]]), method="ward.D"),
+                     k=2)
+  }
 
   ifelse(meanmean.fd(Datamems[cursplit==1])<meanmean.fd(Datamems[cursplit==2]),
          cursplit<-as.numeric(cursplit==2),
@@ -321,7 +326,7 @@ checkem<-function(toclust.fd,Dist, dsubs,dsubsname,weights,minbucket,minsplit,sp
   splitrow<-candidates2[which(.Cluster_frame$inertiadel[candidates2]==maxone)]
 
   ## Make new clusters from that cluster
-  splitter(splitrow, toclust.fd,Dist,dsubs,dsubsname,weights)
+  splitter(splitrow, toclust.fd,Dist,dsubs,dsubsname,weights, method)
 
 
 }
