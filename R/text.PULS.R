@@ -2,7 +2,7 @@ text.PULS <- function(x,abbrev,which,...){
     ## Set up some defaults and abbreviate, then use
     ## text.rpart.
 	if(missing(which))which <-3
-	text(.62,.5,"Inertia Explained", srt=90)
+	# text(.62,.5,"Inertia Explained", srt=90)
 	text.rpart(x,which=which,abbrev=abbrev,...)
 
 	if(abbrev=='L'){
@@ -11,5 +11,5 @@ text.PULS <- function(x,abbrev,which,...){
 			names <- uvars[ uvars != "<leaf>"]
 			nums <- paste("V",1:length(names),sep="")
 			legend(mean(max(x$frame$loc),min(x$frame$loc)),.9,paste(nums,names,sep=" = "),bty='n')
-	}	
+	}
 }
