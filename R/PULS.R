@@ -236,7 +236,7 @@ splitter<-function(splitrow,toclust.fd,Dist,dsubs,dsubsname,weights,method){
 ## We are keeping all of the information regarding which clusters we have in
 ## frame. At this point, we want to find the terminal node with the greatest change in inertia and bipartion it.
 
-FindSplit <- function(frame,row,toclust.fd,Dist,dsubs,dsubsname,warn,weights,minbucket,minsplit,spliton){  #passes distance matrices and names of subregions - MG
+FindSplit <- function(frame,row,toclust.fd,Dist,dsubs,dsubsname,warn,weights,minbucket,minsplit,spliton,method){  #passes distance matrices and names of subregions - MG
 
   bycol<-numeric()
 
@@ -321,7 +321,7 @@ checkem<-function(toclust.fd,Dist, dsubs,dsubsname,weights,minbucket,minsplit,sp
   ## Current terminal nodes
   candidates<-which(.Cluster_frame$var == '<leaf>' & is.na(.Cluster_frame$bipartsplitrow))
   ## Split the best one. Return to Nada which never gets output.
-  Nada <- sapply(candidates,function(x)FindSplit(.Cluster_frame,x,toclust.fd,Dist, dsubs,dsubsname,warn,weights,minbucket,minsplit,spliton))
+  Nada <- sapply(candidates,function(x)FindSplit(.Cluster_frame,x,toclust.fd,Dist, dsubs,dsubsname,warn,weights,minbucket,minsplit,spliton,method))
 
   ## See which ones are left.
   candidates2 <- which(.Cluster_frame$var == '<leaf>')
