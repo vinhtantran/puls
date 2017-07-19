@@ -341,7 +341,7 @@ checkem<-function(toclust.fd,Dist, dsubs,dsubsname,weights,minbucket,minsplit,sp
 
 ## Calculate inertia for a given subset of the data from a distance matrix.
 inertiaD <- function(X){
-  if (X == 0) return(0) else
+  if (!is.matrix(X)) return(0) else
     if (dim(X)[1]==0) return(0) else
       if (!is.matrix(X)) return(X) else
         return(sum(X^2)/(dim(X)[1]*2))
