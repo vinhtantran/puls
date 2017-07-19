@@ -266,7 +266,14 @@ FindSplit <- function(frame,row,toclust.fd,Dist,dsubs,dsubsname,warn,weights,min
     # If #obs satisfies minsplit then split further, otherwise not bother to do anything
     # Check for minsplit could occur earlier, but want to replace inertia change with NAs so the search will look elsewhere
     if (length(mems) >= minsplit) {
-      pot.split.unsorted <- pam(x=as.dist(dsubs[mems,mems,i]),k=2)$clustering
+      # Tan, 7/6/17, add another choice of method, "ward".
+      pot.split.unsorted <- as.numeric()
+      if (method == "pam") {
+        pot.split.unsorted <- pam(x=as.dist(dsubs[mems,mems,i]),k=2)$clustering
+      } else if (method == "ward") {
+        pot.split.unsorted<-cutree(hclust(as.dist(dsubs[mems,mems,i]), method="ward.D"),
+                         k=2)
+      }
 
       #Trying to create coding to partially sort the splits from small to large with 0s for smaller and 1 for larger means
       ifelse(meanmean.fd(Datamems[pot.split.unsorted==1]) < meanmean.fd(Datamems[pot.split.unsorted==2]),
@@ -334,9 +341,10 @@ checkem<-function(toclust.fd,Dist, dsubs,dsubsname,weights,minbucket,minsplit,sp
 
 ## Calculate inertia for a given subset of the data from a distance matrix.
 inertiaD <- function(X){
-  if (dim(X)[1]==0) return(0) else
-    if (!is.matrix(X)) return(X) else
-      return(sum(X^2)/(dim(X)[1]*2))
+  if (X == 0) return(0) else
+    if (dim(X)[1]==0) return(0) else
+      if (!is.matrix(X)) return(X) else
+        return(sum(X^2)/(dim(X)[1]*2))
 }
 
 ## Find medoid of the cluster.
