@@ -1,4 +1,4 @@
-plot.wave <- function(fd, puls, member = T, medoids = T, ...) {
+plot.wave <- function(fd, puls, member = T, medoids = T, separate = F, ...) {
 
   if (member && !medoids) {
     plot.fd(fd$fd, col=puls$Membership,...)
@@ -16,6 +16,17 @@ plot.wave <- function(fd, puls, member = T, medoids = T, ...) {
     m <- as.factor(puls$Membership)
     levels(m) <- 1:length(m)
     m <- as.numeric(m)
-    plot(fd$fd, col=m, lty=lty.lst, lwd=lwd.lst, ...)
+
+    if (!separate) {
+      plot(fd$fd, col=m, lty=lty.lst, lwd=lwd.lst, ...)
+    } else {
+      par(ask=T)
+      for (i in 1:length(meds)) {
+        lty.lst1 <- lty.lst
+        lty.lst1[-which(m == i)] <- 0
+        plot(fd$fd, col=m, lty=lty.lst1, lwd=lwd.lst, ...)
+      }
+      par(ask=F)
+    }
   }
 }
