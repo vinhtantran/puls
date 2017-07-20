@@ -16,6 +16,6 @@ plot.wave <- function(fd, puls, member = T, medoids = T, ...) {
     m <- as.factor(puls$Membership)
     levels(m) <- 1:length(m)
     m <- as.numeric(m)
-    plot(fd$fd, col=m, lty=lty.lst, lwd=lwd.lst)
+    plot(fd$fd, col=m, lty=lty.lst, lwd=lwd.lst, ...)
   }
 }
