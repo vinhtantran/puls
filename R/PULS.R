@@ -303,14 +303,14 @@ FindSplit <- function(frame,row,toclust.fd,Dist,dsubs,dsubsname,warn,weights,min
   if(nrow(ind) > 1 & .MonoClustwarn==0){.MonoClustwarn <<- 1; warning("One or more of the splits chosen had an alternative split that reduced deviance by the same amount.")}
   split<-ind[1,]
 
-  memsA<-mems[Cutsmems[,split[2]]==0]; memsB<-setdiff(mems,memsA);
+  memsA<-mems[Cutsmems[,spliton[split[2]]]==0]; memsB<-setdiff(mems,memsA);
 
   # calculate our change in inertia
   inertiadel <- inertiap - inertiaD(Dist[memsA,memsA]) - inertiaD(Dist[memsB,memsB])
 
   ## Update our frame
-  frame[row,7] <- split[1]
-  frame[row,8] <- dsubsname[split[2]] #Put the name of the subregion used for the split OR maybe use bipartvar as slot for name of split?
+  frame[row,7] <- spliton[split[1]]
+  frame[row,8] <- dsubsname[spliton[split[2]]] #Put the name of the subregion used for the split OR maybe use bipartvar as slot for name of split?
   frame[row,9] <- inertiadel
   .Cluster_frame<<-frame
 }
