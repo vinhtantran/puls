@@ -358,7 +358,7 @@ med <- function(members,Dist){
   }
 }
 
-fdistmatrix=function(yfd=yfd,subrange=subrange,distmethod="fast"){ #Eventually modify to allow unions of subintervals to be defined
+fdistmatrix=function(yfd=yfd,subrange=subrange,distmethod="usc"){ #Eventually modify to allow unions of subintervals to be defined
   N=length(yfd$fdnames$reps)
   #Convert to an fdata object evaluated just over the range defined in subrange:
   Ydist=matrix(0,nrow=N,ncol=N)
