@@ -10,3 +10,4 @@ License: GPL-2
 Depends: cluster,fda,fda.usc
 Encoding: UTF-8
 LazyData: true
+Suggests: testthat
