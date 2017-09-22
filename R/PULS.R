@@ -1,5 +1,5 @@
 #' Title
-#' 
+#'
 #' PULS function for non functional data (only used when you know that the data
 #' shouldn't be convereted into functional because it's already smooth, e.g.
 #' your data are step function)
@@ -394,7 +394,7 @@ fdistmatrix=function(yfd=yfd,subrange=subrange,distmethod="usc"){ #Eventually mo
     predfd=predict(yfd,t_high)
     yfdata=fdata(mdata=t(predfd),argvals=t_high)
 
-    Ydist=as.matrix(as.dist(metric.lp(yfdata),diag=T,upper=T))
+    YdistF=as.matrix(as.dist(metric.lp(yfdata),diag=T,upper=T))
   } else {
     for (j1 in 1:(N-1)){
       fdfirst=yfd[j1]
