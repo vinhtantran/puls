@@ -1,3 +1,27 @@
+#' Title
+#' 
+#' PULS function for non functional data (only used when you know that the data
+#' shouldn't be convereted into functional because it's already smooth, e.g.
+#' your data are step function)
+#'
+#' @param toclust.fd data set, whereas rows are functional entities and columns are
+#' variables
+#' @param method the clustering method you want to run in each subregion. Can be
+#' chosen between \code{pam} and \code{ward}
+#' @param intervals a data set (or matrix) with rows are intervals and columns
+#' are the beginning and ending indices of of the interval
+#' @param spliton restrict the partitioning on a specific set of subregions
+#' @param distmethod the method for calculating the distance matrix
+#' @param labels the name of entities
+#' @param nclusters the number of clusters
+#' @param minbucket the minimum number of data points in one cluster allowed
+#' @param minsplit the minimum size of a cluster that can still be considered to
+#' be a split candidate
+#'
+#' @return
+#' @export
+#'
+#' @examples
 PULS<-function(toclust.fd, method=c("pam", "ward"),intervals=c(0,1),spliton=NULL,distmethod=c("usc", "manual"), labels=toclust.fd$fdnames[2]$reps, nclusters=length(toclust.fd$fdnames[2]$reps), minbucket=2, minsplit=4){
 
   # Tan Tran, 6/28/17, check the distmethod arguments
