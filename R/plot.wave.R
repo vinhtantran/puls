@@ -1,3 +1,16 @@
+#' Plot the Partitioned Functional Wave by PULS
+#'
+#' After partitioning using PULS, this function can plot the functional waves and
+#' color different clusters as well as their medoids
+#'
+#' @param fd the fdSmooth object, created by fda::smooth.basis() function
+#' @param puls the output of PULS algorithm
+#' @param member whether or not making cluster's members different colors
+#' @param medoids whether or not highlighting the medoid of each cluster
+#' @param separate if \code{TRUE}, the function will create separate plot for each cluster
+#' @param ... other optional plotting arguments
+#'
+#' @examples
 plot.wave <- function(fd, puls, member = T, medoids = T, separate = F, ...) {
 
   if (member && !medoids) {

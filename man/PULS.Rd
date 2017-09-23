@@ -2,7 +2,7 @@
 % Please edit documentation in R/PULS.R
 \name{PULS}
 \alias{PULS}
-\title{Title}
+\title{Partitioning Using Local Subregions (PULS)}
 \usage{
 PULS(toclust.fd, method = c("pam", "ward"), intervals = c(0, 1),
   spliton = NULL, distmethod = c("usc", "manual"),
@@ -33,8 +33,11 @@ are the beginning and ending indices of of the interval}
 \item{minsplit}{the minimum size of a cluster that can still be considered to
 be a split candidate}
 }
+\value{
+
+}
 \description{
-PULS function for non functional data (only used when you know that the data
+PULS function for functional data (only used when you know that the data
 shouldn't be convereted into functional because it's already smooth, e.g.
 your data are step function)
 }

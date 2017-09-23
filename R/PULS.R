@@ -1,6 +1,6 @@
-#' Title
+#' Partitioning Using Local Subregions (PULS)
 #'
-#' PULS function for non functional data (only used when you know that the data
+#' PULS function for functional data (only used when you know that the data
 #' shouldn't be convereted into functional because it's already smooth, e.g.
 #' your data are step function)
 #'
@@ -19,7 +19,6 @@
 #' be a split candidate
 #'
 #' @return
-#' @export
 #'
 #' @examples
 PULS<-function(toclust.fd, method=c("pam", "ward"), intervals=c(0,1),
