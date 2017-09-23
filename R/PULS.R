@@ -22,7 +22,11 @@
 #' @export
 #'
 #' @examples
-PULS<-function(toclust.fd, method=c("pam", "ward"),intervals=c(0,1),spliton=NULL,distmethod=c("usc", "manual"), labels=toclust.fd$fdnames[2]$reps, nclusters=length(toclust.fd$fdnames[2]$reps), minbucket=2, minsplit=4){
+PULS<-function(toclust.fd, method=c("pam", "ward"), intervals=c(0,1),
+               spliton=NULL, distmethod=c("usc", "manual"),
+               labels=toclust.fd$fdnames[2]$reps,
+               nclusters=length(toclust.fd$fdnames[2]$reps),
+               minbucket=2, minsplit=4){
 
   # Tan Tran, 6/28/17, check the distmethod arguments
   distmethod <- match.arg(distmethod)
@@ -67,14 +71,14 @@ PULS<-function(toclust.fd, method=c("pam", "ward"),intervals=c(0,1),spliton=NULL
 
   #Works if the $fd version of the fd object is passed into the initial function
   for (j in 1:nsub){
-    dsubs[,,j]=as.matrix(fdistmatrix(toclust.fd,subrange=intervals[j,]))
+    dsubs[,,j]=as.matrix(fdistmatrix(toclust.fd,subrange=intervals[j,], distmethod))
   }
 
   if(any(is.null(rownames(intervals)))) rownames(intervals)=1:length(intervals[,1]) #Checks that rows were named in the intervals matrix, if not it names them by number of row
 
   dsubsnames=rownames(intervals)
 
-  Dist<-fdistmatrix(toclust.fd,subrange=range(intervals))
+  Dist<-fdistmatrix(toclust.fd, subrange=range(intervals), distmethod)
 
 
   distmats<-matrix()
@@ -394,7 +398,7 @@ fdistmatrix=function(yfd=yfd,subrange=subrange,distmethod="usc"){ #Eventually mo
     predfd=predict(yfd,t_high)
     yfdata=fdata(mdata=t(predfd),argvals=t_high)
 
-    YdistF=as.matrix(as.dist(metric.lp(yfdata),diag=T,upper=T))
+    Ydist=as.matrix(as.dist(metric.lp(yfdata),diag=T,upper=T))
   } else {
     for (j1 in 1:(N-1)){
       fdfirst=yfd[j1]
@@ -405,10 +409,10 @@ fdistmatrix=function(yfd=yfd,subrange=subrange,distmethod="usc"){ #Eventually mo
       }
     }
 
-    YdistF=as.matrix(as.dist(t(Ydist),upper=T,diag=T))
+    Ydist=as.matrix(as.dist(t(Ydist),upper=T,diag=T))
   }
 
-  return(YdistF)
+  return(Ydist)
 }
 
 
