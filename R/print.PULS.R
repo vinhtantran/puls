@@ -1,13 +1,25 @@
-print.PULS <- function (x, abbrev=0,  spaces = 2, digits = options('digits')$digits, 
-    ...) 
+#' Title
+#'
+#' @param x
+#' @param abbrev
+#' @param spaces
+#' @param digits
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+print.PULS <- function (x, abbrev=0,  spaces = 2, digits = options('digits')$digits,
+    ...)
 {
 
 ## Modified from print.rpart.
 
 minlength <-0
-    if (!inherits(x, "rpart")) 
+    if (!inherits(x, "rpart"))
         stop("Not legitimate rpart object")
-    if (!is.null(x$frame$splits)) 
+    if (!is.null(x$frame$splits))
         x <- rpconvert(x)
 
     frame <- x$frame
@@ -17,13 +29,13 @@ minlength <-0
     indent <- paste(rep(" ", spaces * 32L), collapse = "")
     if (length(node) > 1L) {
         indent <- substring(indent, 1L, spaces * seq(depth))
-        indent <- paste(c("", indent[depth]), format(node), ")", 
+        indent <- paste(c("", indent[depth]), format(node), ")",
             sep = "")
     }
     else indent <- paste(format(node), ")", sep = "")
     tfun <- (x$functions)$print
     if (!is.null(tfun)) {
-        if (is.null(frame$yval2)) 
+        if (is.null(frame$yval2))
             yval <- tfun(frame$yval, ylevel, digits)
         else yval <- tfun(frame$yval2, ylevel, digits)
     }
@@ -35,7 +47,7 @@ minlength <-0
     n <- frame$n
     z <- paste(indent, z, n, format(signif(frame$dev, digits = digits)), round((1-as.numeric(yval)/1),digits=2), term)
     omit <- x$na.action
-    if (length(omit)) 
+    if (length(omit))
         cat("n=", n[1L], " (", naprint(omit), ")\n\n", sep = "")
     else cat("n=", n[1L], "\n\n")
     cat("Node, N, Within Cluster Deviance, Proportion Deviance Explained\n")
