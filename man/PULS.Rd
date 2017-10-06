@@ -33,9 +33,6 @@ are the beginning and ending indices of of the interval}
 \item{minsplit}{the minimum size of a cluster that can still be considered to
 be a split candidate}
 }
-\value{
-
-}
 \description{
 PULS function for functional data (only used when you know that the data
 shouldn't be convereted into functional because it's already smooth, e.g.

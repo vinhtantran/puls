@@ -10,7 +10,7 @@
 #' @param separate if \code{TRUE}, the function will create separate plot for each cluster
 #' @param ... other optional plotting arguments
 #'
-#' @examples
+#' @export
 plot.wave <- function(fd, puls, member = T, medoids = T, separate = F, ...) {
 
   if (member && !medoids) {

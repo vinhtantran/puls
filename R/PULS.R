@@ -18,9 +18,10 @@
 #' @param minsplit the minimum size of a cluster that can still be considered to
 #' be a split candidate
 #'
-#' @return
+#' @export
 #'
-#' @examples
+#'
+
 PULS<-function(toclust.fd, method=c("pam", "ward"), intervals=c(0,1),
                spliton=NULL, distmethod=c("usc", "manual"),
                labels=toclust.fd$fdnames[2]$reps,
