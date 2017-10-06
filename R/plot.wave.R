@@ -11,7 +11,7 @@
 #' @param ... other optional plotting arguments
 #'
 #' @export
-plot.wave <- function(fd, puls, member = T, medoids = T, separate = F, ...) {
+plotwave <- function(fd, puls, member = T, medoids = T, separate = F, ...) {
 
   if (member && !medoids) {
     plot.fd(fd$fd, col=puls$Membership,...)
