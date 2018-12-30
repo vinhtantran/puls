@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-plot.PULS<-function(x,margin,which,abbrev=4,text=TRUE,cols=NULL...){
+plot.PULS<-function(x,margin,which,abbrev=4,text=TRUE,cols=NULL,...){
     ## This function sets some defaults and changes things a bit, but is mostly a
     ## wrapper for our slightly modified version of rpart's plot function (see plots.R).
 
