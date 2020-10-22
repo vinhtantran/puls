@@ -4,13 +4,15 @@
 \alias{plot.PULS}
 \title{Title}
 \usage{
-\method{plot}{PULS}(x, margin, which, abbrev = 4, text = TRUE,
-  cols = NULL, ...)
+\method{plot}{PULS}(x, margin, which, abbrev = 4, text = TRUE, cols = NULL, ...)
 }
 \arguments{
 \item{cols}{Whether to use color or not}
 
 \item{...}{}
+}
+\value{
+
 }
 \description{
 Title

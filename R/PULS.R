@@ -1,32 +1,55 @@
 #' Partitioning Using Local Subregions (PULS)
 #'
 #' PULS function for functional data (only used when you know that the data
-#' shouldn't be convereted into functional because it's already smooth, e.g.
+#' shouldn't be converted into functional because it's already smooth, e.g.
 #' your data are step function)
 #'
-#' @param toclust.fd data set, whereas rows are functional entities and columns are
-#' variables
-#' @param method the clustering method you want to run in each subregion. Can be
-#' chosen between \code{pam} and \code{ward}
-#' @param intervals a data set (or matrix) with rows are intervals and columns
-#' are the beginning and ending indices of of the interval
-#' @param spliton restrict the partitioning on a specific set of subregions
-#' @param distmethod the method for calculating the distance matrix
-#' @param labels the name of entities
-#' @param nclusters the number of clusters
-#' @param minbucket the minimum number of data points in one cluster allowed
-#' @param minsplit the minimum size of a cluster that can still be considered to
-#' be a split candidate
+#' @param toclust.fd A functional data object as the result of `fda` package.
+#' @param method The clustering method you want to run in each subregion. Can be
+#'   chosen between `pam` and `ward`.
+#' @param intervals A data set (or matrix) with rows are intervals and columns
+#'   are the beginning and ending indexes of of the interval.
+#' @param spliton Restrict the partitioning on a specific set of subregions.
+#' @param distmethod The method for calculating the distance matrix. Choose
+#'   between `"usc"` and `"manual"`.
+#' @param labels The name of entities.
+#' @param nclusters The number of clusters.
+#' @param minbucket The minimum number of data points in one cluster allowed.
+#' @param minsplit The minimum size of a cluster that can still be considered to
+#'   be a split candidate.
 #'
+#' @seealso [fda::is.fda()]
 #' @export
 #'
+#' @examples
+#' library(fda)
+#' NORDER <- 1
+#' splinebasis <- create.bspline.basis(rangeval = c(1, 275),
+#'                                     norder = NORDER,
+#'                                     breaks = 1:275)
 #'
-
-PULS<-function(toclust.fd, method=c("pam", "ward"), intervals=c(0,1),
-               spliton=NULL, distmethod=c("usc", "manual"),
-               labels=toclust.fd$fdnames[2]$reps,
-               nclusters=length(toclust.fd$fdnames[2]$reps),
-               minbucket=2, minsplit=4){
+#' # No need for any more smoothing
+#' fdParobj <- fdPar(fdobj = splinebasis,
+#'                   Lfdobj = 0,
+#'                   lambda = .000001)
+#'
+#' yfd <- smooth.basis(argvals = 1:ncol(soccer.wide[, -1]),
+#'                     y = t(as.matrix(soccer.wide[, -1])),
+#'                     fdParobj = fdParobj)
+#' puls_obj <- PULS(yfd$fd,
+#'                  intervals = intervals,
+#'                  labels = soccer.wide[, 1],
+#'                  nclusters = 4)
+#' plot(puls_obj)
+PULS <- function(toclust.fd,
+               method = c("pam", "ward"),
+               intervals = c(0, 1),
+               spliton = NULL,
+               distmethod = c("usc", "manual"),
+               labels = toclust.fd$fdnames[2]$reps,
+               nclusters = length(toclust.fd$fdnames[2]$reps),
+               minbucket = 2,
+               minsplit = 4) {
 
   # Tan Tran, 6/28/17, check the distmethod arguments
   distmethod <- match.arg(distmethod)
@@ -37,106 +60,124 @@ PULS<-function(toclust.fd, method=c("pam", "ward"), intervals=c(0,1),
 
   #Version of PULS that uses fda.usc distance functions under the hood for increased speed
 
-  ## Switch so we only give off one warning.
-  assign(".MonoClustwarn",0,envir = .GlobalEnv)
-
   #Recommend that rows in intervals are named
   # Package dependencies
 
   ## Ensure that important options make sense
-  if(minbucket>=minsplit){
-    cat("minbucket must be less than minsplit")
-    return(0)
-  }
+  if(minbucket >= minsplit)
+    stop("minbucket must be less than minsplit")
 
-  if(!is.fd(toclust.fd)){
-    cat("fda's fd object must be provided containing functional data")
-    return(0)
-  }
+  if(!fda::is.fd(toclust.fd))
+    stop("fda's fd object must be provided containing functional data")
 
   ## Make variables that are simple derivatives of inputs that will be used a lot.
-  labs<-labels
-  nvars<-length(intervals[,1])  #Now number of subregions so number of rows in intervals matrix - drop this?
-  nobs<-length(labs)
-  weights<-rep(1,nobs) #Could change this later but no reason to change weights in preliminary version
+  labs <- labels
+  nvars <- length(intervals[, 1])  #Now number of subregions so number of rows in intervals matrix - drop this?
+  nobs <- length(labs)
+  weights <- rep(1, nobs) #Could change this later but no reason to change weights in preliminary version
 
-  members<-1:nobs
+  members <- 1:nobs
 
-  nsub<-nrow(intervals)
+  nsub <- nrow(intervals)
 
   #CREATE nxn by nsub distance matrices - will save time later to have all these done once and then subset each distance matrix:
   #Eventually replace with option to pass this information from external setup function so function can be re-run more quickly
 
-  dsubs<-array(0,dim=c(nobs,nobs,nsub))
+  dsubs <- array(0, dim = c(nobs, nobs, nsub))
 
   #Works if the $fd version of the fd object is passed into the initial function
   for (j in 1:nsub){
-    dsubs[,,j]=as.matrix(fdistmatrix(toclust.fd,subrange=intervals[j,], distmethod))
+    dsubs[, , j] = as.matrix(fdistmatrix(toclust.fd,
+                                         subrange = intervals[j, ],
+                                         distmethod))
   }
 
-  if(any(is.null(rownames(intervals)))) rownames(intervals)=1:length(intervals[,1]) #Checks that rows were named in the intervals matrix, if not it names them by number of row
+  # Checks that rows were named in the intervals matrix, if not it names them
+  # by number of row
+  if (any(is.null(rownames(intervals))))
+    rownames(intervals) <- 1:length(intervals[, 1])
 
-  dsubsnames=rownames(intervals)
+  dsubsnames <- rownames(intervals)
 
-  Dist<-fdistmatrix(toclust.fd, subrange=range(intervals), distmethod)
+  Dist <- fdistmatrix(toclust.fd, subrange = range(intervals), distmethod)
 
 
-  distmats<-matrix()
+  distmats <- matrix()
 
   ## Set up a vector containing each observation's membership. Put into global environment, but this will be deleted at the end
   ## of this function. Using global environment allows us to modify things recursively as we partition clusters.
-  assign(".Cloc",rep(1,nobs), envir = .GlobalEnv)
+  assign(".Cloc", rep(1, nobs), envir = .GlobalEnv)
 
   ## Likewise, set up the first (entire dataset) cluster in our Cluster frame where we keep track of each of the clusters and the
   ## partitioning.
-  assign(".Cluster_frame", data.frame(number = 1, var = "<leaf>", n = nobs,wt = sum(weights[members]), inertia = inertiaD(Dist[members,members]), bipartvar="NA", bipartsplitrow=NA, bipartsplitcol=NA,inertiadel=0, yval=1,medoid = med(members,Dist), category = NA, cut=NA,loc=0.1, stringsAsFactors=FALSE), envir = .GlobalEnv)
+  assign(".Cluster_frame",
+         data.frame(number = 1,
+                    var = "<leaf>",
+                    n = nobs,
+                    wt = sum(weights[members]),
+                    inertia = inertiaD(Dist[members,members]),
+                    bipartvar="NA",
+                    bipartsplitrow = NA,
+                    bipartsplitcol = NA,
+                    inertiadel = 0,
+                    yval = 1,
+                    medoid = med(members, Dist),
+                    category = NA,
+                    cut = NA,
+                    loc = 0.1,
+                    stringsAsFactors = FALSE),
+         envir = .GlobalEnv)
 
 
-  ## This loop runs until we have nclusters, have exhausted our observations or run into our minsplit restriction (minbucket not easily controlled in PULS).
-  #while((sum(.Cluster_frame$var=="<leaf>") < nclusters)&(min(.Cluster_frame$n)>=minsplit)){ #Removing minsplit check to have it look elsewhere for other splits
-
-
-  while((sum(.Cluster_frame$var=="<leaf>") < nclusters)){
-    check <- checkem(toclust.fd,Dist, dsubs,dsubsnames,weights,minbucket,minsplit,spliton,method) #passing the responses, the global distance matrix, the subreg distance matrices, and names of intervals
-    if(check==0){break}
+  # This loop runs until we have nclusters, have exhausted our observations or
+  # run into our minsplit restriction (minbucket not easily controlled in PULS).
+  while ((sum(.Cluster_frame$var == "<leaf>") < nclusters)) {
+    # Passing the responses, the global distance matrix, the subreg distance
+    # matrices, and names of intervals
+    check <- checkem(toclust.fd, Dist, dsubs, dsubsnames, weights, minbucket,
+                     minsplit, spliton, method)
+    if (check == 0) { break }
   }
 
 
-  ## Most of the rest of the function does some bizarre text operations
-  ## the reason for this is because I stole a lot of code from rpart,
-  ## so we need to follow their text and labelling conventions to that our objects
-  ## which inherit from rpart can print and plot correctly.
+  # Most of the rest of the function does some bizarre text operations
+  # the reason for this is because I stole a lot of code from rpart,
+  # so we need to follow their text and labelling conventions to that our
+  # objects which inherit from rpart can print and plot correctly.
 
-  ## Change the number column to rownames...
-  rownames(.Cluster_frame)<-.Cluster_frame$number
-  .Cluster_frame2<-.Cluster_frame[,-1]
+  # Change the number column to rownames...
+  rownames(.Cluster_frame) <- .Cluster_frame$number
+  .Cluster_frame2 <- .Cluster_frame[, -1]
 
-  ## This is what will print at each terminal node on the dendrogram
-  ## (See plot.MonoClust).
+  # This is what will print at each terminal node on the dendrogram
+  # (See plot.MonoClust).
   textfxn<-function(yval,dev,wt,ylevel,digits,n,meds,names, use.n){
     paste("\n  n=", n,"\n           M=",meds, sep="")
   }
 
-  ## Seperate categorical and quantitative splits as the text and plot
-  ## functions must treat them a bit differently
-  var <-.Cluster_frame2$var
+  # Seperate categorical and quantitative splits as the text and plot functions
+  # must treat them a bit differently
+  var <- .Cluster_frame2$var
   cattog <- .Cluster_frame2$category
 
-  splits<-which(var != '<leaf>')
-  cat_splits<-which(var != '<leaf>' & cattog == 1)
+  splits <- which(var != '<leaf>')
+  cat_splits <- which(var != '<leaf>' & cattog == 1)
 
-  ## Piece together a vector of labels to be printed. Kind of a weird way to do this, but
-  ## again, following rparts conventions, and we want to allow the user to have options
-  ## regarding how to print inequalities.
-  ineq<-rep(c('<','>='),length(splits))
-  level<-.Cluster_frame2$cut[splits]
-  level<-rep(level,each=2)
-  vars<-rep(var[splits],each=2)
-  labsnum <- c('root',paste(vars,ineq,level,sep=' '))
-  labs<-c('root',sapply(splits,getlevels,cats = cat_splits,varnames=var, frame=.Cluster_frame2,catnames=catnames,quali_ordered=quali_ordered))
+  # Piece together a vector of labels to be printed. Kind of a weird way to do
+  # this, but again, following rparts conventions, and we want to allow the user
+  # to have options regarding how to print inequalities.
+  ineq <- rep(c('<', '>='), length(splits))
+  level <- .Cluster_frame2$cut[splits]
+  level <- rep(level, each = 2)
+  vars <- rep(var[splits], each = 2)
+  labsnum <- c('root', paste(vars, ineq, level, sep = ' '))
+  labs <- c('root',
+            sapply(splits, getlevels, cats = cat_splits, varnames = var,
+                   frame = .Cluster_frame2, catnames = catnames,
+                   quali_ordered = quali_ordered))
 
   ## name a column what I probably should hav already named it, but I don't want to change all the code.
-  colnames(.Cluster_frame2)[4] <-"dev"
+  colnames(.Cluster_frame2)[4] <- "dev"
 
   ## Reorder the columns so they print out nicely, again because I don't want to go back and change things.
   .Cluster_frame2 <- .Cluster_frame2[,c(1,12,2,3,4,5,6,7,8,9,10,11,13)]
@@ -386,7 +427,8 @@ med <- function(members,Dist){
   }
 }
 
-fdistmatrix=function(yfd=yfd,subrange=subrange,distmethod="usc"){ #Eventually modify to allow unions of subintervals to be defined
+#Eventually modify to allow unions of subintervals to be defined
+fdistmatrix <- function(yfd, subrange, distmethod) {
   N=length(yfd$fdnames$reps)
   #Convert to an fdata object evaluated just over the range defined in subrange:
   Ydist=matrix(0,nrow=N,ncol=N)

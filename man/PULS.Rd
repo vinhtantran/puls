@@ -4,11 +4,17 @@
 \alias{PULS}
 \title{Partitioning Using Local Subregions (PULS)}
 \usage{
-PULS(toclust.fd, method = c("pam", "ward"), intervals = c(0, 1),
-  spliton = NULL, distmethod = c("usc", "manual"),
+PULS(
+  toclust.fd,
+  method = c("pam", "ward"),
+  intervals = c(0, 1),
+  spliton = NULL,
+  distmethod = c("usc", "manual"),
   labels = toclust.fd$fdnames[2]$reps,
-  nclusters = length(toclust.fd$fdnames[2]$reps), minbucket = 2,
-  minsplit = 4)
+  nclusters = length(toclust.fd$fdnames[2]$reps),
+  minbucket = 2,
+  minsplit = 4
+)
 }
 \arguments{
 \item{toclust.fd}{data set, whereas rows are functional entities and columns are
@@ -18,7 +24,7 @@ variables}
 chosen between \code{pam} and \code{ward}}
 
 \item{intervals}{a data set (or matrix) with rows are intervals and columns
-are the beginning and ending indices of of the interval}
+are the beginning and ending indexes of of the interval}
 
 \item{spliton}{restrict the partitioning on a specific set of subregions}
 
@@ -35,6 +41,14 @@ be a split candidate}
 }
 \description{
 PULS function for functional data (only used when you know that the data
-shouldn't be convereted into functional because it's already smooth, e.g.
+shouldn't be converted into functional because it's already smooth, e.g.
 your data are step function)
+}
+\examples{
+NORDER <- 1
+splinebasis <- create.bspline.basis(rangeval=c(1,275),norder=NORDER, breaks = 1:275)
+fdParobj<-fdPar(fdobj=splinebasis,Lfdobj=0,lambda=.000001) # No need for any more smoothing
+yfd<-smooth.basis(argvals=1:ncol(soccer.wide[,-1]), y=t(as.matrix(soccer.wide[,-1])), fdParobj=fdParobj)
+PULS(yfd$fd, intervals = intervals, labels = soccer.wide[,1], nclusters = 4)
+plot(PULS(yfd$fd, intervals = intervals, labels = soccer.wide[,1], nclusters = 4))
 }

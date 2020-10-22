@@ -4,11 +4,13 @@
 \alias{print.PULS}
 \title{Title}
 \usage{
-\method{print}{PULS}(x, abbrev = 0, spaces = 2,
-  digits = options("digits")$digits, ...)
+\method{print}{PULS}(x, abbrev = 0, spaces = 2, digits = options("digits")$digits, ...)
 }
 \arguments{
 \item{...}{}
+}
+\value{
+
 }
 \description{
 Title
