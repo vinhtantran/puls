@@ -2,16 +2,40 @@
 % Please edit documentation in R/print.PULS.R
 \name{print.PULS}
 \alias{print.PULS}
-\title{Title}
+\title{Print PULS Clustering Results}
 \usage{
 \method{print}{PULS}(x, abbrev = 0, spaces = 2, digits = options("digits")$digits, ...)
 }
 \arguments{
-\item{...}{}
+\item{x}{PULS result object.}
+
+\item{abbrev}{Whether to print the abbreviated versions of variable names.
+Can be either "no" (default), "short", or "abbreviate". Short forms of them
+can also be used.
+
+If "no", the labels recorded in \code{x$labels} are used.
+
+If "short", variable names will be turned into "V1", "V2", ...
+
+If "abbreviate", \code{\link[=abbreviate]{abbreviate()}} function will be used. Use the optional
+arguments for this function.}
+
+\item{spaces}{Spaces indent between 2 tree levels.}
+
+\item{digits}{Number of significant digits to print.}
+
+\item{...}{Optional arguments to \code{\link[=abbreviate]{abbreviate()}},}
 }
 \value{
-
+A nicely displayed PULS split tree.
 }
 \description{
-Title
+Render the \code{PULS} split tree in an easy to read format with important
+information such as terminal nodes, etc.
+}
+\examples{
+library(fda)
+}
+\seealso{
+\code{\link[=abbreviate]{abbreviate()}}
 }

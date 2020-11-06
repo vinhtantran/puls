@@ -1,15 +1,29 @@
-#' Title
+#' Print PULS Clustering Results
 #'
-#' @param x
-#' @param abbrev
-#' @param spaces
-#' @param digits
-#' @param ...
+#' Render the `PULS` split tree in an easy to read format with important
+#' information such as terminal nodes, etc.
 #'
-#' @return
+#' @param x PULS result object.
+#' @param abbrev Whether to print the abbreviated versions of variable names.
+#'   Can be either "no" (default), "short", or "abbreviate". Short forms of them
+#'   can also be used.
+#'
+#'   If "no", the labels recorded in `x$labels` are used.
+#'
+#'   If "short", variable names will be turned into "V1", "V2", ...
+#'
+#'   If "abbreviate", [abbreviate()] function will be used. Use the optional
+#'   arguments for this function.
+#' @param spaces Spaces indent between 2 tree levels.
+#' @param digits Number of significant digits to print.
+#' @param ... Optional arguments to [abbreviate()],
+#'
+#' @return A nicely displayed PULS split tree.
+#' @seealso [abbreviate()]
 #' @export
 #'
 #' @examples
+#' library(fda)
 print.PULS <- function (x, abbrev=0,  spaces = 2, digits = options('digits')$digits,
     ...)
 {

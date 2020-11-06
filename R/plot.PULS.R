@@ -1,17 +1,26 @@
-#' Title
+#' Plot PULS Splitting Rule Tree
 #'
-#' @param x
-#' @param margin
-#' @param which
-#' @param abbrev
-#' @param text
-#' @param cols Whether to use color or not
-#' @param ...
+#' Print the PULS tree in the form of dendrogram.
 #'
-#' @return
+#' @param x PULS object.
+#' @param margin An extra fraction of white space to leave around the borders of
+#'   the tree. (Long labels sometimes get cut off by the default computation).
+#' @param which Labeling modes, which are:
+#'   * 1: only splitting variable names are shown, no splitting rules.
+#'   * 2: only splitting rules to the left branches are shown.
+#'   * 3: only splitting rules to the right branches are shown.
+#'   * 4 (default): splitting rules are shown on both sides of branches.
+#' @param text Whether to print the labels on the tree.
+#' @param cols Whether to use color or not.
+#' @param ... Arguments to be passed to [graphics::plot.default()] and
+#'   [graphics::lines()].
+#' @inheritParams print.PULS
+#'
+#' @return A plot of splitting order.
 #' @export
 #'
 #' @examples
+#' library(fda)
 plot.PULS<-function(x,margin,which,abbrev=4,text=TRUE,cols=NULL,...){
     ## This function sets some defaults and changes things a bit, but is mostly a
     ## wrapper for our slightly modified version of rpart's plot function (see plots.R).

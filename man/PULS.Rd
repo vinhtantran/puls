@@ -17,27 +17,27 @@ PULS(
 )
 }
 \arguments{
-\item{toclust.fd}{data set, whereas rows are functional entities and columns are
-variables}
+\item{toclust.fd}{A functional data object as the result of \code{fda} package.}
 
-\item{method}{the clustering method you want to run in each subregion. Can be
-chosen between \code{pam} and \code{ward}}
+\item{method}{The clustering method you want to run in each subregion. Can be
+chosen between \code{pam} and \code{ward}.}
 
-\item{intervals}{a data set (or matrix) with rows are intervals and columns
-are the beginning and ending indexes of of the interval}
+\item{intervals}{A data set (or matrix) with rows are intervals and columns
+are the beginning and ending indexes of of the interval.}
 
-\item{spliton}{restrict the partitioning on a specific set of subregions}
+\item{spliton}{Restrict the partitioning on a specific set of subregions.}
 
-\item{distmethod}{the method for calculating the distance matrix}
+\item{distmethod}{The method for calculating the distance matrix. Choose
+between \code{"usc"} and \code{"manual"}.}
 
-\item{labels}{the name of entities}
+\item{labels}{The name of entities.}
 
-\item{nclusters}{the number of clusters}
+\item{nclusters}{The number of clusters.}
 
-\item{minbucket}{the minimum number of data points in one cluster allowed}
+\item{minbucket}{The minimum number of data points in one cluster allowed.}
 
-\item{minsplit}{the minimum size of a cluster that can still be considered to
-be a split candidate}
+\item{minsplit}{The minimum size of a cluster that can still be considered to
+be a split candidate.}
 }
 \description{
 PULS function for functional data (only used when you know that the data
@@ -45,10 +45,26 @@ shouldn't be converted into functional because it's already smooth, e.g.
 your data are step function)
 }
 \examples{
+library(fda)
 NORDER <- 1
-splinebasis <- create.bspline.basis(rangeval=c(1,275),norder=NORDER, breaks = 1:275)
-fdParobj<-fdPar(fdobj=splinebasis,Lfdobj=0,lambda=.000001) # No need for any more smoothing
-yfd<-smooth.basis(argvals=1:ncol(soccer.wide[,-1]), y=t(as.matrix(soccer.wide[,-1])), fdParobj=fdParobj)
-PULS(yfd$fd, intervals = intervals, labels = soccer.wide[,1], nclusters = 4)
-plot(PULS(yfd$fd, intervals = intervals, labels = soccer.wide[,1], nclusters = 4))
+splinebasis <- create.bspline.basis(rangeval = c(1, 275),
+                                    norder = NORDER,
+                                    breaks = 1:275)
+
+# No need for any more smoothing
+fdParobj <- fdPar(fdobj = splinebasis,
+                  Lfdobj = 0,
+                  lambda = .000001)
+
+yfd <- smooth.basis(argvals = 1:ncol(soccer.wide[, -1]),
+                    y = t(as.matrix(soccer.wide[, -1])),
+                    fdParobj = fdParobj)
+puls_obj <- PULS(yfd$fd,
+                 intervals = intervals,
+                 labels = soccer.wide[, 1],
+                 nclusters = 4)
+plot(puls_obj)
+}
+\seealso{
+\code{\link[fda:is.fd]{fda::is.fd()}}
 }

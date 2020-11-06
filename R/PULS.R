@@ -18,38 +18,56 @@
 #' @param minsplit The minimum size of a cluster that can still be considered to
 #'   be a split candidate.
 #'
-#' @seealso [fda::is.fda()]
+#' @seealso [fda::is.fd()]
 #' @export
 #'
 #' @examples
 #' library(fda)
-#' NORDER <- 1
-#' splinebasis <- create.bspline.basis(rangeval = c(1, 275),
-#'                                     norder = NORDER,
-#'                                     breaks = 1:275)
 #'
+#' #Build common argval fd object from predicted.mat
+#' NBASIS <- 300
+#' NORDER <- 4
+#' predicted.mat <- readRDS("data/predicted.mat.rds")
+#' y <- t(predicted.mat)
+#' splinebasis <-
+#'   create.bspline.basis(rangeval = c(1, 366),
+#'                        nbasis = NBASIS,
+#'                        norder = NORDER)
 #' # No need for any more smoothing
-#' fdParobj <- fdPar(fdobj = splinebasis,
-#'                   Lfdobj = 0,
-#'                   lambda = .000001)
+#' fdParobj <-
+#'   fdPar(fdobj = splinebasis,
+#'         Lfdobj = 2,
+#'         lambda = .000001)
+#' yfd.full <- smooth.basis(argvals = 1:366,
+#'                          y = y,
+#'                          fdParobj = fdParobj)
+#' yfd.train <-
+#'   smooth.basis(
+#'     argvals = 1:366,
+#'     y = t(predicted.mat[1:(nrow(predicted.mat) - 4), ]),
+#'     fdParobj = fdParobj
+#'   )
 #'
-#' yfd <- smooth.basis(argvals = 1:ncol(soccer.wide[, -1]),
-#'                     y = t(as.matrix(soccer.wide[, -1])),
-#'                     fdParobj = fdParobj)
-#' puls_obj <- PULS(yfd$fd,
-#'                  intervals = intervals,
-#'                  labels = soccer.wide[, 1],
-#'                  nclusters = 4)
-#' plot(puls_obj)
+#' Jan <- c(1, 31); Feb <- c(31, 59); Mar <- c(59, 90)
+#' Apr <- c(90, 120); May <- c(120, 151); Jun <- c(151, 181)
+#' Jul <- c(181, 212); Aug <- c(212, 243); Sep <- c(243, 273)
+#' Oct <- c(273, 304); Nov <- c(304, 334); Dec <- c(334, 365)
+#'
+#' intervals <-
+#'   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
+#'
+#' PULS4.pam <- PULS(toclust.fd = yfd.train$fd, intervals = intervals,
+#'                   nclusters = 4, method = "pam")
+#' PULS4.pam
 PULS <- function(toclust.fd,
-               method = c("pam", "ward"),
-               intervals = c(0, 1),
-               spliton = NULL,
-               distmethod = c("usc", "manual"),
-               labels = toclust.fd$fdnames[2]$reps,
-               nclusters = length(toclust.fd$fdnames[2]$reps),
-               minbucket = 2,
-               minsplit = 4) {
+                 method = c("pam", "ward"),
+                 intervals = c(0, 1),
+                 spliton = NULL,
+                 distmethod = c("usc", "manual"),
+                 labels = toclust.fd$fdnames[2]$reps,
+                 nclusters = length(toclust.fd$fdnames[2]$reps),
+                 minbucket = 2,
+                 minsplit = 4) {
 
   # Tan Tran, 6/28/17, check the distmethod arguments
   distmethod <- match.arg(distmethod)
@@ -237,10 +255,17 @@ splitter<-function(splitrow,toclust.fd,Dist,dsubs,dsubsname,weights,method){
   # Tan, 7/6/17, add another choice of method, "ward".
   cursplit <- as.numeric()
   if (method == "pam") {
-    cursplit<-pam(x=as.dist(dsubs[mems,mems,dsubsname==split[2]]),k=2)$clustering #Generate variable to use for splitting based on subregion i
-  } else if (method == "ward") {
-    cursplit<-cutree(hclust(as.dist(dsubs[mems, mems, dsubsname == split[2]]), method="ward.D"),
-                     k=2)
+    # Generate variable to use for splitting based on subregion i
+    cursplit <-
+      cluster::pam(x = stats::as.dist(dsubs[mems, mems, dsubsname == split[2]]),
+                   k = 2)$clustering
+  } else {
+    cursplit <-
+      stats::cutree(
+        stats::hclust(
+          stats::as.dist(dsubs[mems, mems, dsubsname == split[2]]),
+          method = "ward.D"),
+        k = 2)
   }
 
   ifelse(meanmean.fd(Datamems[cursplit==1])<meanmean.fd(Datamems[cursplit==2]),
@@ -458,8 +483,8 @@ fdistmatrix <- function(yfd, subrange, distmethod) {
 }
 
 
-meanmean.fd<-function(yfd){
-  mfd= mean(predict(mean(yfd)))
+meanmean.fd <- function(yfd) {
+  mfd = mean(predict(mean(yfd)))
   return(mfd)
 }
 

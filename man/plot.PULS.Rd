@@ -2,18 +2,48 @@
 % Please edit documentation in R/plot.PULS.R
 \name{plot.PULS}
 \alias{plot.PULS}
-\title{Title}
+\title{Plot PULS Splitting Rule Tree}
 \usage{
 \method{plot}{PULS}(x, margin, which, abbrev = 4, text = TRUE, cols = NULL, ...)
 }
 \arguments{
-\item{cols}{Whether to use color or not}
+\item{x}{PULS object.}
 
-\item{...}{}
+\item{margin}{An extra fraction of white space to leave around the borders of
+the tree. (Long labels sometimes get cut off by the default computation).}
+
+\item{which}{Labeling modes, which are:
+\itemize{
+\item 1: only splitting variable names are shown, no splitting rules.
+\item 2: only splitting rules to the left branches are shown.
+\item 3: only splitting rules to the right branches are shown.
+\item 4 (default): splitting rules are shown on both sides of branches.
+}}
+
+\item{abbrev}{Whether to print the abbreviated versions of variable names.
+Can be either "no" (default), "short", or "abbreviate". Short forms of them
+can also be used.
+
+If "no", the labels recorded in \code{x$labels} are used.
+
+If "short", variable names will be turned into "V1", "V2", ...
+
+If "abbreviate", \code{\link[=abbreviate]{abbreviate()}} function will be used. Use the optional
+arguments for this function.}
+
+\item{text}{Whether to print the labels on the tree.}
+
+\item{cols}{Whether to use color or not.}
+
+\item{...}{Arguments to be passed to \code{\link[graphics:plot.default]{graphics::plot.default()}} and
+\code{\link[graphics:lines]{graphics::lines()}}.}
 }
 \value{
-
+A plot of splitting order.
 }
 \description{
-Title
+Print the PULS tree in the form of dendrogram.
+}
+\examples{
+library(fda)
 }
