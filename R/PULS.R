@@ -24,18 +24,19 @@
 #' @examples
 #' library(fda)
 #'
-#' #Build common argval fd object from predicted.mat
+#' # Build common argval fd object from predicted.mat
 #' NBASIS <- 300
 #' NORDER <- 4
 #' predicted.mat <- readRDS("data/predicted.mat.rds")
 #' y <- t(predicted.mat)
-#' splinebasis <-
+#' spline_basis <-
 #'   create.bspline.basis(rangeval = c(1, 366),
 #'                        nbasis = NBASIS,
 #'                        norder = NORDER)
+#'
 #' # No need for any more smoothing
 #' fdParobj <-
-#'   fdPar(fdobj = splinebasis,
+#'   fdPar(fdobj = spline_basis,
 #'         Lfdobj = 2,
 #'         lambda = .000001)
 #' yfd.full <- smooth.basis(argvals = 1:366,
