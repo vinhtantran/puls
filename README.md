@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Travis build
+status](https://travis-ci.org/vinhtantran/PULS.svg?branch=master)](https://travis-ci.org/vinhtantran/PULS)
 <!-- badges: end -->
 
 The goal of PULS is to …
@@ -21,7 +23,7 @@ install.packages("PULS")
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
+# install.packages("remotes")
 remotes::install_github("vinhtantran/PULS")
 ```
 
@@ -31,28 +33,6 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(PULS)
-#> Loading required package: cluster
-#> Loading required package: fda
-#> Loading required package: Matrix
-#> 
-#> Attaching package: 'fda'
-#> The following object is masked from 'package:graphics':
-#> 
-#>     matplot
-#> Loading required package: fda.usc
-#> Loading required package: splines
-#> Loading required package: MASS
-#> Loading required package: mgcv
-#> Loading required package: nlme
-#> This is mgcv 1.8-33. For overview type 'help("mgcv-package")'.
-#> ----------------------------------------------------------------------------------
-#>  Functional Data Analysis and Utilities for Statistical Computing
-#>  fda.usc version 2.0.2 (built on 2020-02-17) is now loaded
-#>  fda.usc is running sequentially usign foreach package
-#>  Please, execute ops.fda.usc() once to run in local parallel mode
-#>  Deprecated functions: min.basis, min.np, anova.hetero, anova.onefactor, anova.RPm
-#>  New functions: optim.basis, optim.np, fanova.hetero, fanova.onefactor, fanova.RPm
-#> ----------------------------------------------------------------------------------
 ## basic example code
 ```
 

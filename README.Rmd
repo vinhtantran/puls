@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # PULS
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.org/vinhtantran/PULS.svg?branch=master)](https://travis-ci.org/vinhtantran/PULS)
 <!-- badges: end -->
 
 The goal of PULS is to ...
@@ -24,14 +25,14 @@ The goal of PULS is to ...
 
 You can install the released version of PULS from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
+```r
 install.packages("PULS")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
-``` r
-# install.packages("devtools")
+```r
+# install.packages("remotes")
 remotes::install_github("vinhtantran/PULS")
 ```
 ## Example
