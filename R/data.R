@@ -53,4 +53,44 @@
 #'   \item{Source Data}{data source in NOAA database}
 #' }
 #' @source <https://nsidc.org/data/G02135/versions/3>
+#' @examples
+#' library(dplyr)
+#' library(lubridate)
+#' library(ggplot2)
+#'
+#' data(arctic_2019)
+#'
+#' # Create day in the year column to replace Month and Day
+#' north <-
+#'   arctic_2019 %>%
+#'   mutate(yday = yday(make_date(Year, Month, Day)),
+#'          .keep = "all") %>%
+#'   select(Year, yday, Extent)
+#'
+#' ggplot(north) +
+#'   geom_linerange(aes(x = yday, ymin = Year - 0.2, ymax = Year + 0.2),
+#'                  size = 0.5, color = "red") +
+#'   scale_y_continuous(breaks = seq(1980, 2020, by = 5),
+#'                      minor_breaks = NULL) +
+#'   labs(x = "Day",
+#'        y = "Year",
+#'        title = "Measurement frequencies were not always the same")
 "arctic_2019"
+
+#' Interpolated and Smoothed Version of Arctic Data
+#'
+#' Raw Arctic data are smoothed and turned into a functional data. All are done
+#' by using `fda` package.
+#'
+#' @format A data frame with 13391 rows and 6 variables:
+#' \describe{
+#'   \item{Year}{years of available data (1978--2019)}
+#'   \item{Month}{month (01--12)}
+#'   \item{Day}{day of the month indicated in Column Month (Fair, Good, Very
+#'     Good, Premium, Ideal)}
+#'   \item{Extent}{daily ice extent, to three decimal places}
+#'   \item{Missing}{whether a day is missing (1) or not (0))}
+#'   \item{Source Data}{data source in NOAA database}
+#' }
+#' @seealso NOAA's raw data at [arctic_2019].
+"smoothed_arctic"

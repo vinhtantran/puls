@@ -12,6 +12,7 @@ arctic <- read_csv("ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/daily/d
   set_colnames(arctic_raw_colnames)
 
 arctic_2019 <- arctic %>%
-  filter(Year <= 2019)
+  filter(Year <= 2019) %>%
+  mutate(across(c(Year, Month, Day), as.integer))
 
 usethis::use_data(arctic_2019, overwrite = TRUE)
