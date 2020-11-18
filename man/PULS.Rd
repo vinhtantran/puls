@@ -47,30 +47,19 @@ your data are step function)
 \examples{
 library(fda)
 
-# Build common argval fd object from predicted.mat
+# Build a simple fd object from already smoothed smoothed_arctic
+data(smoothed_arctic)
 NBASIS <- 300
 NORDER <- 4
-predicted.mat <- readRDS("data/predicted.mat.rds")
-y <- t(predicted.mat)
-spline_basis <-
-  create.bspline.basis(rangeval = c(1, 366),
-                       nbasis = NBASIS,
-                       norder = NORDER)
-
-# No need for any more smoothing
-fdParobj <-
-  fdPar(fdobj = spline_basis,
-        Lfdobj = 2,
-        lambda = .000001)
-yfd.full <- smooth.basis(argvals = 1:366,
-                         y = y,
-                         fdParobj = fdParobj)
-yfd.train <-
-  smooth.basis(
-    argvals = 1:366,
-    y = t(predicted.mat[1:(nrow(predicted.mat) - 4), ]),
-    fdParobj = fdParobj
-  )
+y <- t(as.matrix(smoothed_arctic[, -1]))
+splinebasis <- create.bspline.basis(rangeval = c(1, 365),
+                                    nbasis = NBASIS,
+                                    norder = NORDER)
+fdParobj <- fdPar(fdobj = splinebasis,
+                  Lfdobj = 2,
+                  # No need for any more smoothing
+                  lambda = .000001)
+yfd <- smooth.basis(argvals = 1:365, y = y, fdParobj = fdParobj)
 
 Jan <- c(1, 31); Feb <- c(31, 59); Mar <- c(59, 90)
 Apr <- c(90, 120); May <- c(120, 151); Jun <- c(151, 181)
@@ -80,9 +69,9 @@ Oct <- c(273, 304); Nov <- c(304, 334); Dec <- c(334, 365)
 intervals <-
   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 
-PULS4.pam <- PULS(toclust.fd = yfd.train$fd, intervals = intervals,
+PULS4_pam <- PULS(toclust.fd = yfd.train$fd, intervals = intervals,
                   nclusters = 4, method = "pam")
-PULS4.pam
+PULS4_pam
 }
 \seealso{
 \code{\link[fda:is.fd]{fda::is.fd()}}

@@ -9,26 +9,27 @@ Authors@R:
              comment = c(ORCID = "0000-0001-6933-1201")),
       person(given = "Tan",
              family = "Tran",
-             role = c("cre"),
+             role = c("aut", "cre"),
              email = "vinhtantran@gmail.com",
              comment = c(ORCID = "0000-0001-9881-6339")))
-Description: Partitioning using local subregions (PULS) is a clustering 
-    technique designed to explore subregions of functional data for information 
-    to split the curves into clusters.
+Description: Partitioning using local subregions (PULS) is a
+    clustering technique designed to explore subregions of functional data
+    for information to split the curves into clusters.
 License: GPL (>= 2)
+Depends: 
+    R (>= 3.3.0)
+Imports: 
+    cluster,
+    dplyr (>= 1.0.0),
+    fda,
+    ggplot2,
+    graphics,
+    grDevices,
+    lubridate (>= 1.7.0),
+    monoClust,
+    stats,
+    tibble (>= 3.0.0)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Imports: 
-    monoClust,
-    fda,
-    grDevices,
-    graphics,
-    stats,
-    cluster,
-    dplyr (>= 1.0.0),
-    lubridate (>= 1.7.0),
-    ggplot2
-Depends: 
-    R (>= 2.10)

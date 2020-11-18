@@ -44,13 +44,12 @@
 #'
 #' @format A data frame with 13391 rows and 6 variables:
 #' \describe{
-#'   \item{Year}{years of available data (1978--2019)}
-#'   \item{Month}{month (01--12)}
-#'   \item{Day}{day of the month indicated in Column Month (Fair, Good, Very
-#'     Good, Premium, Ideal)}
-#'   \item{Extent}{daily ice extent, to three decimal places}
-#'   \item{Missing}{whether a day is missing (1) or not (0))}
-#'   \item{Source Data}{data source in NOAA database}
+#'   \item{Year}{Years of available data (1978--2019).}
+#'   \item{Month}{Month (01--12).}
+#'   \item{Day}{Day of the month indicated in Column Month.}
+#'   \item{Extent}{Daily ice extent, to three decimal places.}
+#'   \item{Missing}{Whether a day is missing (1) or not (0)).}
+#'   \item{Source Data}{data source in NOAA database.}
 #' }
 #' @source <https://nsidc.org/data/G02135/versions/3>
 #' @examples
@@ -77,20 +76,21 @@
 #'        title = "Measurement frequencies were not always the same")
 "arctic_2019"
 
-#' Interpolated and Smoothed Version of Arctic Data
+#' Discrete Form of Smoothed Functional Form of Arctic Data
 #'
-#' Raw Arctic data are smoothed and turned into a functional data. All are done
-#' by using `fda` package.
+#' Raw Arctic data were smoothed and then transformed into functional data using
+#' `fda` package. To overcome the difficulty of exporting an `fda` object in a
+#' package, the object was discretized into a data set with 365 columns
+#' corresponding to 365 days a year and 39 rows corresponding to
+#' 39 years. The years are from 1979 to 1986, then from 1989 to 2018. The years
+#' 1978, 1987, and 1988 were removed because the measurements were not complete.
 #'
-#' @format A data frame with 13391 rows and 6 variables:
-#' \describe{
-#'   \item{Year}{years of available data (1978--2019)}
-#'   \item{Month}{month (01--12)}
-#'   \item{Day}{day of the month indicated in Column Month (Fair, Good, Very
-#'     Good, Premium, Ideal)}
-#'   \item{Extent}{daily ice extent, to three decimal places}
-#'   \item{Missing}{whether a day is missing (1) or not (0))}
-#'   \item{Source Data}{data source in NOAA database}
-#' }
-#' @seealso NOAA's raw data at [arctic_2019].
+#' @format A data frame with 39 rows corresponding to 39 years (1979 to 1986,
+#'   1989 to 2019) and 366 columns:
+#'   \describe{
+#'     \item{year}{Year of data.}
+#'     \item{day_1 to day_365}{365 days in a year.}
+#'   }
+#' @seealso NOAA's raw data at [arctic_2019] and the code to generate this data
+#'   in data-raw/ folder of source code.
 "smoothed_arctic"
