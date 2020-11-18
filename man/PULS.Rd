@@ -69,7 +69,7 @@ Oct <- c(273, 304); Nov <- c(304, 334); Dec <- c(334, 365)
 intervals <-
   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 
-PULS4_pam <- PULS(toclust.fd = yfd.train$fd, intervals = intervals,
+PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
                   nclusters = 4, method = "pam")
 PULS4_pam
 }

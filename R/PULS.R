@@ -46,7 +46,7 @@
 #' intervals <-
 #'   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 #'
-#' PULS4_pam <- PULS(toclust.fd = yfd.train$fd, intervals = intervals,
+#' PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
 #'                   nclusters = 4, method = "pam")
 #' PULS4_pam
 PULS <- function(toclust.fd,
@@ -59,33 +59,27 @@ PULS <- function(toclust.fd,
                  minbucket = 2,
                  minsplit = 4) {
 
-  # Tan Tran, 6/28/17, check the distmethod arguments
-  distmethod <- match.arg(distmethod)
-  method <- match.arg(method)
-
-  if (is.null(spliton)) spliton <- 1:nrow(intervals)
-  #MG - 11/24/2014
-
-  #Version of PULS that uses fda.usc distance functions under the hood for increased speed
-
-  #Recommend that rows in intervals are named
-  # Package dependencies
-
   ## Ensure that important options make sense
-  if(minbucket >= minsplit)
-    stop("minbucket must be less than minsplit")
+  if (!fda::is.fd(toclust.fd))
+    stop("\"toclust.fd\" must be fda's fd object")
 
-  if(!fda::is.fd(toclust.fd))
-    stop("fda's fd object must be provided containing functional data")
+  if (minbucket >= minsplit) {
+    stop("\"minbucket\" must be less than \"minsplit\".")
+  }
+
+  method <- match.arg(method)
+  distmethod <- match.arg(distmethod)
+
+  if (is.null(spliton))
+    spliton <- 1:nrow(intervals)
 
   ## Make variables that are simple derivatives of inputs that will be used a lot.
-  labs <- labels
+  # labs <- labels
   nvars <- length(intervals[, 1])  #Now number of subregions so number of rows in intervals matrix - drop this?
-  nobs <- length(labs)
-  weights <- rep(1, nobs) #Could change this later but no reason to change weights in preliminary version
-
+  nobs <- length(labels)
+  # No reason to change weights in preliminary version
+  weights <- rep(1, nobs)
   members <- 1:nobs
-
   nsub <- nrow(intervals)
 
   #CREATE nxn by nsub distance matrices - will save time later to have all these done once and then subset each distance matrix:
@@ -353,9 +347,9 @@ FindSplit <- function(frame,row,toclust.fd,Dist,dsubs,dsubsname,warn,weights,min
       # Tan, 7/6/17, add another choice of method, "ward".
       pot.split.unsorted <- as.numeric()
       if (method == "pam") {
-        pot.split.unsorted <- pam(x=as.dist(dsubs[mems,mems,i]),k=2)$clustering
+        pot.split.unsorted <- cluster::pam(x=stats::as.dist(dsubs[mems,mems,i]),k=2)$clustering
       } else if (method == "ward") {
-        pot.split.unsorted<-cutree(hclust(as.dist(dsubs[mems,mems,i]), method="ward.D"),
+        pot.split.unsorted<-stats::cutree(stats::hclust(stats::as.dist(dsubs[mems,mems,i]), method="ward.D"),
                          k=2)
       }
 
@@ -384,7 +378,9 @@ FindSplit <- function(frame,row,toclust.fd,Dist,dsubs,dsubsname,warn,weights,min
 
 
   ## If multiple splits produce the same inertia change output a warning.
-  if(nrow(ind) > 1 & .MonoClustwarn==0){.MonoClustwarn <<- 1; warning("One or more of the splits chosen had an alternative split that reduced deviance by the same amount.")}
+  if(nrow(ind) > 1) {
+    warning("One or more of the splits chosen had an alternative split that reduced deviance by the same amount.")
+  }
   split<-ind[1,]
 
   memsA<-mems[Cutsmems[,spliton[split[2]]]==0]; memsB<-setdiff(mems,memsA);
@@ -453,9 +449,9 @@ fdistmatrix <- function(yfd, subrange, distmethod) {
     t_high=seq(from=subrange[1],to=subrange[2],length.out=nargs)
 
     predfd=predict(yfd,t_high)
-    yfdata=fdata(mdata=t(predfd),argvals=t_high)
+    yfdata=fda.usc::fdata(mdata=t(predfd),argvals=t_high)
 
-    Ydist=as.matrix(as.dist(metric.lp(yfdata),diag=T,upper=T))
+    Ydist=as.matrix(stats::as.dist(fda.usc::metric.lp(yfdata),diag=T,upper=T))
   } else {
     for (j1 in 1:(N-1)){
       fdfirst=yfd[j1]
@@ -466,7 +462,7 @@ fdistmatrix <- function(yfd, subrange, distmethod) {
       }
     }
 
-    Ydist=as.matrix(as.dist(t(Ydist),upper=T,diag=T))
+    Ydist=as.matrix(stats::as.dist(t(Ydist),upper=T,diag=T))
   }
 
   return(Ydist)
@@ -474,7 +470,7 @@ fdistmatrix <- function(yfd, subrange, distmethod) {
 
 
 meanmean.fd <- function(yfd) {
-  mfd = mean(predict(mean(yfd)))
+  mfd = mean(fda::predict.fd(fda::mean.fd(yfd)))
   return(mfd)
 }
 

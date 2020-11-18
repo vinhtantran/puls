@@ -6,11 +6,7 @@
 \title{Discrete Form of Smoothed Functional Form of Arctic Data}
 \format{
 A data frame with 39 rows corresponding to 39 years (1979 to 1986,
-1989 to 2019) and 366 columns:
-\describe{
-\item{year}{Year of data.}
-\item{day_1 to day_365}{365 days in a year.}
-}
+1989 to 2019) and 366 columns.
 }
 \usage{
 smoothed_arctic

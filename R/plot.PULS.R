@@ -104,7 +104,6 @@ PULSggplot<-function(x,toclust.fd, main, type, ylab, xlab,...){
 silh.plot<-function(toclust.fd,intervals,maxnclust){
   silhs<-numeric()
   clustmems<-numeric()
-  require(cluster)
   par(mfrow=c(1,maxnclust-1))
   for (i in (2:maxnclust)){
     #Run cluster analysis of each size (would really benefit from having distance matrices saved and passed on or just from pruning the tree)
@@ -112,8 +111,8 @@ silh.plot<-function(toclust.fd,intervals,maxnclust){
     clust<-PULS(toclust.fd,intervals=intervals,nclusters=i)
      clustmems[,i-1]=clust$Membership
     #Extract cluster membership info
-    silhs<-c(silhs,mean(silhouette(clust$Membership,dmatrix=clust$Dist)[,3]))
-    plot(silhouette(clust$Membership,dmatrix=clust$Dist))
+    silhs<-c(silhs,mean(cluster::silhouette(clust$Membership,dmatrix=clust$Dist)[,3]))
+    plot(cluster::silhouette(clust$Membership,dmatrix=clust$Dist))
   }
   par(mfrow=c(1,1))
   plot(2:(length(silhres)+1),silhres,type="l",ylim=c(0,max(silhres)))
