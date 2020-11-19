@@ -55,66 +55,35 @@ fdistmatrix <- function(yfd, subrange, distmethod) {
 # Create A New Node for Split Data Frame
 new_node <- function(number,
                      var,
-                     cut = -99L,
                      n,
                      wt,
                      inertia,
-                     # ?
-                     bipartvar = "NA",
                      bipartsplitrow = -99L,
                      bipartsplitcol = -99L,
                      inertiadel = 0,
                      inertia_explained = -99,
-                     # ?
-                     yval,
                      medoid,
-                     # ?
-                     category = NA,
                      loc,
                      # split.order = -99L,
-                     # ?
-                     stringsAsFactors = FALSE
-                     # alt = list(
-                     #   tibble::tibble(bipartsplitrow = numeric(),
-                     #                  bipartsplitcol = numeric()))
-                     ) {
+                     alt = FALSE) {
 
   one_row_table <- tibble::tibble(
-    number, var, cut, n,
-    # ?
+    number, var, n,
     wt,
     inertia,
-    # ?
-    bipartvar,
     bipartsplitrow,
     bipartsplitcol, inertiadel,
     inertia_explained,
-    # ?
-    yval,
     medoid,
-    # ?
-    category,
     loc,
     # split.order,
-    # alt,
-    stringsAsFactors)
+    alt)
 
   return(one_row_table)
 }
 
-#' Find Tree Depth Based on Node Indexes
-#'
-#' @param nodes Vector of node indexes in the tree.
-#'
-#' @details
-#' When building PULS tree, the node index was created with the rule that
-#'   new node indexes are the split node times 2 plus 0 (left) and 1 (right).
-#'   Therefore, this function is just a back-transform, taking a log base 2.
-#'
-#' @return Depth of the node, with 0 is the root relative to the input.
-#'
-#' @keywords internal
-tree_depth <- function(nodes) {
-  depth <- floor(log2(nodes) + 1e-07)
-  return(depth - min(depth))
+# Find a approximate mean of a cluster of function
+mean_fd <- function(yfd) {
+  mfd <- mean(fda::predict.fd(fda::mean.fd(yfd)))
+  return(mfd)
 }

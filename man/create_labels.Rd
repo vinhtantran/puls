@@ -11,7 +11,7 @@ create_labels(x, digits, ...)
 
 \item{digits}{Number of significant digits to print.}
 
-\item{...}{Optional arguments to \code{\link[=abbreviate]{abbreviate()}},}
+\item{...}{Further arguments passed to or from other methods.}
 }
 \value{
 A list containing two elements:

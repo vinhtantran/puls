@@ -4,7 +4,7 @@
 \alias{plot.PULS}
 \title{Plot PULS Splitting Rule Tree}
 \usage{
-\method{plot}{PULS}(x, margin, which, abbrev = 4, text = TRUE, cols = NULL, ...)
+\method{plot}{PULS}(x, margin, which, text = TRUE, cols = NULL, ...)
 }
 \arguments{
 \item{x}{PULS object.}

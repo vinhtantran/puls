@@ -14,14 +14,13 @@
 #' @param cols Whether to use color or not.
 #' @param ... Arguments to be passed to [graphics::plot.default()] and
 #'   [graphics::lines()].
-#' @inheritParams print.PULS
 #'
 #' @return A plot of splitting order.
 #' @export
 #'
 #' @examples
 #' library(fda)
-plot.PULS<-function(x,margin,which,abbrev=4,text=TRUE,cols=NULL,...){
+plot.PULS<-function(x,margin,which,text=TRUE,cols=NULL,...){
     ## This function sets some defaults and changes things a bit, but is mostly a
     ## wrapper for our slightly modified version of rpart's plot function (see plots.R).
 

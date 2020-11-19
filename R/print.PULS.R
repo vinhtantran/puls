@@ -6,10 +6,10 @@
 #' @param x PULS result object.
 #' @param spaces Spaces indent between 2 tree levels.
 #' @param digits Number of significant digits to print.
-#' @param ... Optional arguments to [abbreviate()],
+#' @param ... Further arguments passed to or from other methods.
 #'
-#' @return A nicely displayed PULS split tree.
-#' @seealso [abbreviate()]
+#' @return A nicely displayed PULS split tree in text.
+#'
 #' @export
 #'
 #' @examples

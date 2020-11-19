@@ -30,7 +30,8 @@ Imports:
     monoClust,
     purrr (>= 0.3.0),
     stats,
-    tibble (>= 3.0.0)
+    tibble (>= 3.0.0),
+    stringr (>= 0.5)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

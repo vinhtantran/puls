@@ -13,10 +13,10 @@
 
 \item{digits}{Number of significant digits to print.}
 
-\item{...}{Optional arguments to \code{\link[=abbreviate]{abbreviate()}},}
+\item{...}{Further arguments passed to or from other methods.}
 }
 \value{
-A nicely displayed PULS split tree.
+A nicely displayed PULS split tree in text.
 }
 \description{
 Render the \code{PULS} split tree in an easy to read format with important
@@ -52,7 +52,4 @@ PULS4_pam <- puls(toclust.fd = yfd$fd, intervals = intervals,
                   nclusters = 4, method = "pam")
 print(PULS4_pam)
 }
-}
-\seealso{
-\code{\link[=abbreviate]{abbreviate()}}
 }
