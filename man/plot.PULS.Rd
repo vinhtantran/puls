@@ -20,17 +20,6 @@ the tree. (Long labels sometimes get cut off by the default computation).}
 \item 4 (default): splitting rules are shown on both sides of branches.
 }}
 
-\item{abbrev}{Whether to print the abbreviated versions of variable names.
-Can be either "no" (default), "short", or "abbreviate". Short forms of them
-can also be used.
-
-If "no", the labels recorded in \code{x$labels} are used.
-
-If "short", variable names will be turned into "V1", "V2", ...
-
-If "abbreviate", \code{\link[=abbreviate]{abbreviate()}} function will be used. Use the optional
-arguments for this function.}
-
 \item{text}{Whether to print the labels on the tree.}
 
 \item{cols}{Whether to use color or not.}

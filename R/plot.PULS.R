@@ -73,7 +73,7 @@ PULSplot<-function(x,toclust.fd, main, type, ylab, xlab,...,version){
   if(version==2){
     nobs<-length(toclust.fd$fdnames$reps)
     ids=1:nobs
-    ylim<-c(min(predict(toclust.fd))-.05,max(predict(toclust.fd)))
+    ylim<-c(min(fda::predict.fd(toclust.fd))-.05,max(fda::predict.fd(toclust.fd)))
     par(mfrow=c(1,length(medoids)))
     for (i in (1:length(medoids))){
     plot(toclust.fd[clustids==clustids[medoids[i]]],col="grey",lty=clustid2[medoids[i]],lwd=.9,main= paste("Cluster", deparse(clustids[medoids[i]])),ylim=ylim,ylab="Response",xlab="")
@@ -108,7 +108,7 @@ silh.plot<-function(toclust.fd,intervals,maxnclust){
   for (i in (2:maxnclust)){
     #Run cluster analysis of each size (would really benefit from having distance matrices saved and passed on or just from pruning the tree)
 
-    clust<-PULS(toclust.fd,intervals=intervals,nclusters=i)
+    clust<-puls(toclust.fd,intervals=intervals,nclusters=i)
      clustmems[,i-1]=clust$Membership
     #Extract cluster membership info
     silhs<-c(silhs,mean(cluster::silhouette(clust$Membership,dmatrix=clust$Dist)[,3]))

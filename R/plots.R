@@ -145,12 +145,6 @@ rpartco=function (tree, parms = paste(".rpart.parms", dev.cur(), sep = "."))
     list(x = x, y = y)
 }
 
-tree.depth=function (nodes)
-{
-    depth <- floor(log(nodes, base = 2) + 1e-07)
-    as.vector(depth - min(depth))
-}
-
  rpart.branch=function (x, y, node, branch)
 {
     if (missing(branch)) {

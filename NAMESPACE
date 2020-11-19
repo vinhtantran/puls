@@ -2,5 +2,6 @@
 
 S3method(plot,PULS)
 S3method(print,PULS)
-export(PULS)
+export(fdistmatrix)
 export(plotwave)
+export(puls)
