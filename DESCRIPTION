@@ -16,6 +16,9 @@ Description: Partitioning using local subregions (PULS) is a
     clustering technique designed to explore subregions of functional data
     for information to split the curves into clusters.
 License: GPL (>= 2)
+URL: https://vinhtantran.github.io/PULS/
+    https://github.com/vinhtantran/PULS
+BugReports: https://github.com/vinhtantran/PULS/issues
 Depends: 
     R (>= 3.3.0)
 Imports: 
@@ -26,7 +29,6 @@ Imports:
     ggplot2,
     graphics,
     grDevices,
-    lubridate (>= 1.7.0),
     monoClust,
     purrr (>= 0.3.0),
     rlang (>= 0.3.0),
