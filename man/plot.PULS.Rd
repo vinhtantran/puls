@@ -4,13 +4,30 @@
 \alias{plot.PULS}
 \title{Plot PULS Splitting Rule Tree}
 \usage{
-\method{plot}{PULS}(x, margin, which, text = TRUE, cols = NULL, ...)
+\method{plot}{PULS}(
+  x,
+  branch = 1,
+  margin = c(0.12, 0.02, 0, 0.05),
+  text = TRUE,
+  which = 4,
+  digits = getOption("digits") - 2,
+  cols = NULL,
+  col.type = c("l", "p", "b"),
+  ...
+)
 }
 \arguments{
 \item{x}{PULS object.}
 
+\item{branch}{Controls the shape of the branches from parent to child node.
+Any number from 0 to 1 is allowed. A value of 1 gives square shouldered
+branches, a value of 0 give V shaped branches, with other values being
+intermediate.}
+
 \item{margin}{An extra fraction of white space to leave around the borders of
 the tree. (Long labels sometimes get cut off by the default computation).}
+
+\item{text}{Whether to print the labels on the tree.}
 
 \item{which}{Labeling modes, which are:
 \itemize{
@@ -20,12 +37,18 @@ the tree. (Long labels sometimes get cut off by the default computation).}
 \item 4 (default): splitting rules are shown on both sides of branches.
 }}
 
-\item{text}{Whether to print the labels on the tree.}
+\item{digits}{Number of significant digits to print.}
 
-\item{cols}{Whether to use color or not.}
+\item{cols}{Whether to shown color bars at leaves or not. It helps matching
+this tree plot with other plots whose cluster membership were colored. It
+only works when \code{text} is \code{TRUE}. Either \code{NULL}, a vector of one color, or
+a vector of colors matching the number of leaves.}
 
-\item{...}{Arguments to be passed to \code{\link[graphics:plot.default]{graphics::plot.default()}} and
-\code{\link[graphics:lines]{graphics::lines()}}.}
+\item{col.type}{When \code{cols} is set, choose whether the color indicators are
+shown in a form of solid lines below the leaves (\code{"l"}), or big points
+(\code{"p"}), or both (\code{"b"}).}
+
+\item{...}{Arguments to be passed to \code{\link[monoClust:plot.MonoClust]{monoClust::plot.MonoClust()}}.}
 }
 \value{
 A plot of splitting order.
@@ -34,5 +57,33 @@ A plot of splitting order.
 Print the PULS tree in the form of dendrogram.
 }
 \examples{
+\donttest{
 library(fda)
+
+# Build a simple fd object from already smoothed smoothed_arctic
+data(smoothed_arctic)
+NBASIS <- 300
+NORDER <- 4
+y <- t(as.matrix(smoothed_arctic[, -1]))
+splinebasis <- create.bspline.basis(rangeval = c(1, 365),
+                                    nbasis = NBASIS,
+                                    norder = NORDER)
+fdParobj <- fdPar(fdobj = splinebasis,
+                  Lfdobj = 2,
+                  # No need for any more smoothing
+                  lambda = .000001)
+yfd <- smooth.basis(argvals = 1:365, y = y, fdParobj = fdParobj)
+
+Jan <- c(1, 31); Feb <- c(31, 59); Mar <- c(59, 90)
+Apr <- c(90, 120); May <- c(120, 151); Jun <- c(151, 181)
+Jul <- c(181, 212); Aug <- c(212, 243); Sep <- c(243, 273)
+Oct <- c(273, 304); Nov <- c(304, 334); Dec <- c(334, 365)
+
+intervals <-
+  rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
+
+PULS4_pam <- puls(toclust.fd = yfd$fd, intervals = intervals,
+                  nclusters = 4, method = "pam")
+plot(PULS4_pam)
+}
 }

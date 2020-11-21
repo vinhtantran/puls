@@ -17,7 +17,8 @@ splitter(
 )
 }
 \arguments{
-\item{toclust.fd}{A functional data object as the result of \code{fda} package.}
+\item{toclust.fd}{A functional data object (i.e., having class \code{fd}) created
+from \code{fda} package. See \code{\link[fda:fd]{fda::fd()}}.}
 
 \item{split_row}{The row index in frame that would be split on.}
 

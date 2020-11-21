@@ -1,23 +1,23 @@
 #' Cluster Inertia Calculation
 #'
 #' Calculate inertia for a given subset of the distance matrix from the original
-#' data set provided to X. Assumes that distance matrices are stored as matrices
+#' data set provided to x. Assumes that distance matrices are stored as matrices
 #' and not distance objects
 #'
-#' @param X distance matrix, not an object of some distance measure
+#' @param x distance matrix, not an object of some distance measure
 #'
-#' @return inertia value of the matrix, formula in Chavent (1998). If X is a
+#' @return inertia value of the matrix, formula in Chavent (1998). If x is a
 #'   single number, return 0.
 #' @keywords internal
-inertia_calc <- function(X) {
+inertia_calc <- function(x) {
 
-  if (!is.numeric(X) && !is.matrix(X))
-    stop("X has to be a numerical value or matrix.")
+  if (!is.numeric(x) && !is.matrix(x))
+    stop("x has to be a numerical value or matrix.")
 
   # If singleton cluster, inertia is 0
-  inertia_value <- ifelse(length(X) == 1 && is.numeric(X),
+  inertia_value <- ifelse(length(x) == 1 && is.numeric(x),
                           0,
-                          sum(X^2) / (dim(X)[1] * 2))
+                          sum(x^2) / (dim(x)[1] * 2))
   return(inertia_value)
 }
 

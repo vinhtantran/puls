@@ -45,70 +45,11 @@
 print.PULS <- function(x, spaces = 2L, digits = getOption("digits"), ...) {
 
   if (!inherits(x, "PULS"))
-    stop("Not a legitimate \"PULS\" object")
+    stop("Not a legitimate PULS object.")
 
-  frame <- x$frame
-  node <- frame$number
-  depth <- tree_depth(node)
+  coerced_mono <- as_MonoClust.PULS(x)
 
-  # 2L is because of 1 number (1 or 2 digits) and the bracket
-  indent <- stringr::str_pad(stringr::str_c(node, ")"), depth * spaces + 2L)
+  print(coerced_mono, spaces = spaces, digits = digits, ...)
 
-  inertia_explained <- ifelse(!is.na(frame$inertia_explained),
-                              format(signif(frame$inertia_explained,
-                                            digits = digits)),
-                              "")
-
-  term <- rep(" ", length(depth))
-  term[frame$var == "<leaf>"] <- "*"
-  labs <- create_labels(x, digits = digits, ...)
-  n <- frame$n
-
-  z <- paste(indent, labs, n, format(signif(frame$inertia, digits = digits)),
-             inertia_explained, term)
-
-  cat("n =", n[1L], "\n\n")
-
-  cat("Node) Split, N, Cluster Inertia, Proportion Inertia Explained\n")
-  cat("      * denotes terminal node\n\n")
-  cat(z, sep = "\n")
-
-  # Add a note of duplicate here
   return(invisible(x))
-}
-
-#' Create Labels for Split Variables
-#'
-#' This function prints variable's labels for a `PULS` tree.
-#'
-#' @inheritParams print.PULS
-#'
-#' @return A list containing two elements:
-#'   * `names`: A named vector of labels corresponding to range's names
-#'   (at vector names).
-#'   * `labels`: Vector of labels of splitting rules to be displayed.
-#' @keywords internal
-create_labels <- function(x, digits, ...) {
-
-  frame <- x$frame
-
-  # Create split labels
-  split_index <- which(frame$var != "<leaf>")
-  lsplit <- rsplit <- character(length(split_index))
-
-  label <- frame$var[split_index]
-
-  lsplit <- paste0(label, "--")
-  rsplit <- paste0(label, "++")
-
-  node <- frame$number
-  parent <- match(node %/% 2, node[split_index])
-  odd <- as.logical(node %% 2)
-
-  labels <- character(nrow(frame))
-  labels[odd] <- rsplit[parent[odd]]
-  labels[!odd] <- lsplit[parent[!odd]]
-  labels[1] <- "root"
-
-  return(labels)
 }

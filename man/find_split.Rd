@@ -19,7 +19,8 @@ find_split(
 )
 }
 \arguments{
-\item{toclust.fd}{A functional data object as the result of \code{fda} package.}
+\item{toclust.fd}{A functional data object (i.e., having class \code{fd}) created
+from \code{fda} package. See \code{\link[fda:fd]{fda::fd()}}.}
 
 \item{frame_row}{One row of the split tree as data frame.}
 

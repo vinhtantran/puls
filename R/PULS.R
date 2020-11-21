@@ -4,7 +4,8 @@
 #' shouldn't be converted into functional because it's already smooth, e.g.
 #' your data are step function)
 #'
-#' @param toclust.fd A functional data object as the result of `fda` package.
+#' @param toclust.fd A functional data object (i.e., having class `fd`) created
+#'   from `fda` package. See [fda::fd()].
 #' @param method The clustering method you want to run in each subregion. Can be
 #'   chosen between `pam` and `ward`.
 #' @param intervals A data set (or matrix) with rows are intervals and columns
@@ -63,7 +64,7 @@ puls <- function(toclust.fd,
 
   ## Ensure that important options make sense
   if (!fda::is.fd(toclust.fd))
-    stop("\"toclust.fd\" must be fda's fd object")
+    stop("\"toclust.fd\" must be a functional data object (fda::is.fd).")
 
   if (minbucket >= minsplit) {
     stop("\"minbucket\" must be less than \"minsplit\".")
@@ -137,9 +138,20 @@ puls <- function(toclust.fd,
             cluster_frame == -99,
             NA)
 
+  # Add medoids of each cluster
+  medoids <- cluster_frame$medoid[cluster_frame$var == "<leaf>"]
+  names(medoids) <- cluster_frame$number[cluster_frame$var == "<leaf>"]
+
+  # Whether there exists an alternate splitting route
+  alt <- any(cluster_frame$alt)
+
   puls_obj <- list(frame = cluster_frame,
                    membership = cloc,
-                   dist = dist)
+                   dist = dist,
+                   # Add terms to keep track of subregion name
+                   terms = dsubsnames,
+                   medoids = medoids,
+                   alt = alt)
 
   class(puls_obj) <- "PULS"
 
