@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![Travis build status](https://travis-ci.org/vinhtantran/PULS.svg?branch=master)](https://travis-ci.org/vinhtantran/PULS)
 <!-- badges: end -->
 
-The goal of PULS is to ...
+Partitioning using local subregions (PULS) is a clustering technique designed to explore subregions of functional data for information to split the curves into clusters.
 
 ## Installation
 
@@ -35,27 +35,45 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("remotes")
 remotes::install_github("vinhtantran/PULS")
 ```
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(PULS)
-## basic example code
+library(fda)
+# Build a simple fd object from already smoothed smoothed_arctic
+data(smoothed_arctic)
+NBASIS <- 300
+NORDER <- 4
+y <- t(as.matrix(smoothed_arctic[, -1]))
+splinebasis <- create.bspline.basis(rangeval = c(1, 365),
+                                    nbasis = NBASIS,
+                                    norder = NORDER)
+fdParobj <- fdPar(fdobj = splinebasis,
+                  Lfdobj = 2,
+                  # No need for any more smoothing
+                  lambda = .000001)
+yfd <- smooth.basis(argvals = 1:365, y = y, fdParobj = fdParobj)
+
+Jan <- c(1, 31); Feb <- c(31, 59); Mar <- c(59, 90)
+Apr <- c(90, 120); May <- c(120, 151); Jun <- c(151, 181)
+Jul <- c(181, 212); Aug <- c(212, 243); Sep <- c(243, 273)
+Oct <- c(273, 304); Nov <- c(304, 334); Dec <- c(334, 365)
+
+intervals <-
+  rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
+
+PULS4_pam <- PULS::puls(toclust.fd = yfd$fd, intervals = intervals,
+                  nclusters = 4, method = "pam")
+PULS4_pam
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/master/examples>.
+Output plot
 
 You can also embed plots, for example:
 
 ```{r pressure, echo = FALSE}
-plot(pressure)
+# plot(PULS4_pam)
 ```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
