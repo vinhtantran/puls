@@ -29,7 +29,7 @@ Imports:
     ggplot2,
     graphics,
     grDevices,
-    monoClust,
+    monoClust (>= 1.2.0),
     purrr (>= 0.3.0),
     rlang (>= 0.3.0),
     stats,
