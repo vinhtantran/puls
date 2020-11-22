@@ -36,9 +36,9 @@ Imports:
     stringr (>= 0.5),
     tibble (>= 3.0.0),
     tidyr (>= 1.0.0)
+Suggests: 
+    lubridate
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Suggests: 
-    lubridate

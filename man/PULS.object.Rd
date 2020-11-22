@@ -5,7 +5,7 @@
 \title{PULS Tree Object}
 \value{
 \describe{
-\item{frame}{Datas frame in the form of a \code{\link[tibble:tibble]{tibble::tibble()}} representing
+\item{frame}{Data frame in the form of a \code{\link[tibble:tibble]{tibble::tibble()}} representing
 a tree structure with one row for each node. The columns include:
 \describe{
 \item{number}{Index of the node. Depth of a node can be derived by

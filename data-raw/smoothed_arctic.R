@@ -60,7 +60,6 @@ gcv_extract <- function(lambda, i, north_year) {
 set.seed(12345)
 count <- 0
 for (i in years) {
-  # message(i)
   north_year <- north_extra %>%
     filter(Year == i)
 
@@ -72,7 +71,6 @@ for (i in years) {
                   upper = upper,
                   i = i,
                   north_year = north_year)
-  print(upper)
   while (lambda$par == upper) {
     upper <- upper + 5
     lambda <- optim(par = 0.2,
@@ -81,7 +79,6 @@ for (i in years) {
                     upper = upper,
                     i = i,
                     north_year = north_year)
-    print(upper)
   }
   lambda_lst[count] <- lambda$par
 }
@@ -90,7 +87,6 @@ predicted_mat <- matrix(NA, length(years), 365)
 
 count <- 0
 for (i in years) {
-  message(i)
   count <- count + 1
   north_year <- north_extra %>%
     filter(Year == i)
