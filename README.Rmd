@@ -16,24 +16,25 @@ knitr::opts_chunk$set(
 # PULS
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.org/vinhtantran/PULS.svg?branch=master)](https://travis-ci.org/vinhtantran/PULS)
+[![Travis build status](https://travis-ci.com/vinhtantran/puls.svg?branch=master)](https://travis-ci.com/vinhtantran/puls)
+[![R-CMD-check](https://github.com/vinhtantran/puls/workflows/R-CMD-check/badge.svg)](https://github.com/vinhtantran/puls/actions)
 <!-- badges: end -->
 
 Partitioning using local subregions (PULS) is a clustering technique designed to explore subregions of functional data for information to split the curves into clusters.
 
 ## Installation
 
-You can install the released version of PULS from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of `puls` from [CRAN](https://CRAN.R-project.org) with:
 
 ```r
-install.packages("PULS")
+install.packages("puls")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ```r
 # install.packages("remotes")
-remotes::install_github("vinhtantran/PULS")
+remotes::install_github("vinhtantran/puls")
 ```
 
 ## Example
@@ -41,7 +42,7 @@ remotes::install_github("vinhtantran/PULS")
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-library(PULS)
+library(puls)
 library(fda)
 # Build a simple fd object from already smoothed smoothed_arctic
 data(smoothed_arctic)
@@ -65,7 +66,7 @@ Oct <- c(273, 304); Nov <- c(304, 334); Dec <- c(334, 365)
 intervals <-
   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 
-PULS4_pam <- PULS::puls(toclust.fd = yfd$fd, intervals = intervals,
+PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
                   nclusters = 4, method = "pam")
 PULS4_pam
 ```
