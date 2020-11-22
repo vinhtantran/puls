@@ -1,4 +1,4 @@
-Package: PULS
+Package: puls
 Title: Partitioning Using Local Subregions
 Version: 0.1.0
 Authors@R: 
@@ -16,9 +16,9 @@ Description: Partitioning using local subregions (PULS) is a
     clustering technique designed to explore subregions of functional data
     for information to split the curves into clusters.
 License: GPL (>= 2)
-URL: https://vinhtantran.github.io/PULS/
-    https://github.com/vinhtantran/PULS
-BugReports: https://github.com/vinhtantran/PULS/issues
+URL: https://vinhtantran.github.io/puls/,
+    https://github.com/vinhtantran/puls
+BugReports: https://github.com/vinhtantran/puls/issues
 Depends: 
     R (>= 3.3.0)
 Imports: 
@@ -40,3 +40,5 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Suggests: 
+    lubridate

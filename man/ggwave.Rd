@@ -22,7 +22,7 @@ from \code{fda} package. See \code{\link[fda:fd]{fda::fd()}}.}
 \item{intervals}{A data set (or matrix) with rows are intervals and columns
 are the beginning and ending indexes of of the interval.}
 
-\item{puls.obj}{A PULS object as a result of \code{\link[=puls]{puls()}}.}
+\item{puls.obj}{A \code{PULS} object as a result of \code{\link[=PULS]{PULS()}}.}
 
 \item{xlab}{Labels for x-axis. If not provided, the labels stored in \code{fd}
 object will be used.}
@@ -69,7 +69,7 @@ Oct <- c(273, 304); Nov <- c(304, 334); Dec <- c(334, 365)
 intervals <-
   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 
-PULS4_pam <- puls(toclust.fd = yfd$fd, intervals = intervals,
+PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
                   nclusters = 4, method = "pam")
 ggwave(toclust.fd = yfd$fd, intervals = intervals, puls = PULS4_pam)
 }

@@ -2,7 +2,7 @@
 #'
 #' Print the PULS tree in the form of dendrogram.
 #'
-#' @param x PULS object.
+#' @param x A `PULS` object.
 #' @param branch Controls the shape of the branches from parent to child node.
 #'   Any number from 0 to 1 is allowed. A value of 1 gives square shouldered
 #'   branches, a value of 0 give V shaped branches, with other values being
@@ -57,7 +57,7 @@
 #' intervals <-
 #'   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 #'
-#' PULS4_pam <- puls(toclust.fd = yfd$fd, intervals = intervals,
+#' PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
 #'                   nclusters = 4, method = "pam")
 #' plot(PULS4_pam)
 #' }
@@ -75,14 +75,14 @@ plot.PULS <- function(x,
 
   coerced_mono <- as_MonoClust.PULS(x)
 
-  monoClust::plot.MonoClust(coerced_mono,
-                            branch = branch,
-                            margin = margin,
-                            text = text,
-                            which = which,
-                            digits = digits,
-                            cols = cols,
-                            ...)
+  plot(coerced_mono,
+       branch = branch,
+       margin = margin,
+       text = text,
+       which = which,
+       digits = digits,
+       cols = cols,
+       ...)
 
   return(invisible(x))
 }

@@ -3,7 +3,7 @@
 #' After partitioning using PULS, this function can plot the functional waves
 #' and color different clusters as well as their medoids.
 #'
-#' @param puls.obj A PULS object as a result of [puls()].
+#' @param puls.obj A `PULS` object as a result of [PULS()].
 #' @param xlab Labels for x-axis. If not provided, the labels stored in `fd`
 #'   object will be used.
 #' @param ylab Labels for y-axis.  If not provided, the labels stored in `fd`
@@ -11,7 +11,7 @@
 #' @param lwd Linewidth of normal waves.
 #' @param alpha Transparency of normal waves.
 #' @param lwd.med Linewidth of medoid waves.
-#' @inheritParams puls
+#' @inheritParams PULS
 #'
 #' @return A ggplot2 object.
 #' @export
@@ -44,7 +44,7 @@
 #' intervals <-
 #'   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 #'
-#' PULS4_pam <- puls(toclust.fd = yfd$fd, intervals = intervals,
+#' PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
 #'                   nclusters = 4, method = "pam")
 #' ggwave(toclust.fd = yfd$fd, intervals = intervals, puls = PULS4_pam)
 #' }

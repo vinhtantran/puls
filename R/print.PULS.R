@@ -1,9 +1,9 @@
 #' Print PULS Clustering Results
 #'
-#' Render the `PULS` split tree in an easy to read format with important
+#' Render the PULS split tree in an easy to read format with important
 #' information such as terminal nodes, etc.
 #'
-#' @param x PULS result object.
+#' @param x A `PULS` result object.
 #' @param spaces Spaces indent between 2 tree levels.
 #' @param digits Number of significant digits to print.
 #' @param ... Further arguments passed to or from other methods.
@@ -38,7 +38,7 @@
 #' intervals <-
 #'   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 #'
-#' PULS4_pam <- puls(toclust.fd = yfd$fd, intervals = intervals,
+#' PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
 #'                   nclusters = 4, method = "pam")
 #' print(PULS4_pam)
 #' }

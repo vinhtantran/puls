@@ -48,11 +48,11 @@
 #' intervals <-
 #'   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 #'
-#' PULS4_pam <- puls(toclust.fd = yfd$fd, intervals = intervals,
+#' PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
 #'                   nclusters = 4, method = "pam")
 #' PULS4_pam
 #' }
-puls <- function(toclust.fd,
+PULS <- function(toclust.fd,
                  method = c("pam", "ward"),
                  intervals = c(0, 1),
                  spliton = NULL,
@@ -382,7 +382,7 @@ find_split <- function(toclust.fd, frame_row, cloc, dist, dsubs, dsubsname,
 #' @param weights (Currentlt unused) Weights on observations.
 #' @param minsplit The minimum number of observations that must exist in a node
 #'   in order for a split to be attempted.
-#' @inheritParams puls
+#' @inheritParams PULS
 #'
 #' @return It is not supposed to return anything because global environment was
 #'   used. However, if there is nothing left to split, it returns 0 to tell the

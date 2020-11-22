@@ -17,7 +17,7 @@
 )
 }
 \arguments{
-\item{x}{PULS object.}
+\item{x}{A \code{PULS} object.}
 
 \item{branch}{Controls the shape of the branches from parent to child node.
 Any number from 0 to 1 is allowed. A value of 1 gives square shouldered
@@ -82,7 +82,7 @@ Oct <- c(273, 304); Nov <- c(304, 334); Dec <- c(334, 365)
 intervals <-
   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 
-PULS4_pam <- puls(toclust.fd = yfd$fd, intervals = intervals,
+PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
                   nclusters = 4, method = "pam")
 plot(PULS4_pam)
 }

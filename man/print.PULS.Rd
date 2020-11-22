@@ -7,7 +7,7 @@
 \method{print}{PULS}(x, spaces = 2L, digits = getOption("digits"), ...)
 }
 \arguments{
-\item{x}{PULS result object.}
+\item{x}{A \code{PULS} result object.}
 
 \item{spaces}{Spaces indent between 2 tree levels.}
 
@@ -19,7 +19,7 @@
 A nicely displayed PULS split tree in text.
 }
 \description{
-Render the \code{PULS} split tree in an easy to read format with important
+Render the PULS split tree in an easy to read format with important
 information such as terminal nodes, etc.
 }
 \examples{
@@ -48,7 +48,7 @@ Oct <- c(273, 304); Nov <- c(304, 334); Dec <- c(334, 365)
 intervals <-
   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 
-PULS4_pam <- puls(toclust.fd = yfd$fd, intervals = intervals,
+PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
                   nclusters = 4, method = "pam")
 print(PULS4_pam)
 }
