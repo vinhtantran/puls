@@ -1,12 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# PULS
+# puls
 
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.org/vinhtantran/PULS.svg?branch=master)](https://travis-ci.org/vinhtantran/PULS)
+status](https://travis-ci.com/vinhtantran/puls.svg?branch=master)](https://travis-ci.com/vinhtantran/puls)
+[![R-CMD-check](https://github.com/vinhtantran/puls/workflows/R-CMD-check/badge.svg)](https://github.com/vinhtantran/puls/actions)
 <!-- badges: end -->
 
 Partitioning using local subregions (PULS) is a clustering technique
@@ -15,18 +16,18 @@ split the curves into clusters.
 
 ## Installation
 
-You can install the released version of PULS from
+You can install the released version of puls from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("PULS")
+install.packages("puls")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("vinhtantran/PULS")
+# install.packages("devtools")
+devtools::install_github("vinhtantran/puls")
 ```
 
 ## Example
@@ -34,7 +35,7 @@ remotes::install_github("vinhtantran/PULS")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-library(PULS)
+library(puls)
 library(fda)
 #> Loading required package: Matrix
 #> 
@@ -64,7 +65,7 @@ Oct <- c(273, 304); Nov <- c(304, 334); Dec <- c(334, 365)
 intervals <-
   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 
-PULS4_pam <- PULS::puls(toclust.fd = yfd$fd, intervals = intervals,
+PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
                   nclusters = 4, method = "pam")
 #> Warning: executing %dopar% sequentially: no parallel backend registered
 PULS4_pam
@@ -81,11 +82,21 @@ PULS4_pam
 #>     6) Jul 13  463.8466   *
 #>     7) Jul 11  371.2143   *
 #> 
-#> Note: One or more of the splits chosen had an alternative split that
-#>         reduced inertia by the same amount. See "alt" column of "frame"
-#>         object for details.
+#> Note: One or more of the splits chosen had an alternative split that reduced inertia by the same amount. See "alt" column of "frame" object for details.
 ```
 
-Output plot
+You can make a tree plot:
 
-You can also embed plots, for example:
+``` r
+plot(PULS4_pam)
+```
+
+<img src="man/figures/README-tree-1.png" width="100%" />
+
+Or, a wave plot:
+
+``` r
+ggwave(toclust.fd = yfd$fd, intervals = intervals, puls = PULS4_pam)
+```
+
+<img src="man/figures/README-wave-1.png" width="100%" />

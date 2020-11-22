@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# PULS
+# puls
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.com/vinhtantran/puls.svg?branch=master)](https://travis-ci.com/vinhtantran/puls)
@@ -24,19 +24,18 @@ Partitioning using local subregions (PULS) is a clustering technique designed to
 
 ## Installation
 
-You can install the released version of `puls` from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of puls from [CRAN](https://CRAN.R-project.org) with:
 
-```r
+``` r
 install.packages("puls")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
-```r
-# install.packages("remotes")
-remotes::install_github("vinhtantran/puls")
+``` r
+# install.packages("devtools")
+devtools::install_github("vinhtantran/puls")
 ```
-
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
@@ -71,10 +70,15 @@ PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
 PULS4_pam
 ```
 
-Output plot
+You can make a tree plot:
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-# plot(PULS4_pam)
+```{r tree}
+plot(PULS4_pam)
 ```
+
+Or, a wave plot:
+
+```{r wave}
+ggwave(toclust.fd = yfd$fd, intervals = intervals, puls = PULS4_pam)
+```
+

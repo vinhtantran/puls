@@ -1,3 +1,3 @@
-# PULS 0.1.0
+# puls 0.1.0
 
 * Initial release

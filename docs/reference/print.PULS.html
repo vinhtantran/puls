@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print PULS Clustering Results — print.PULS • PULS</title>
+<title>Print PULS Clustering Results — print.PULS • puls</title>
 
 
 <!-- jquery -->
@@ -72,7 +72,7 @@ information such as terminal nodes, etc." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">PULS</a>
+        <a class="navbar-link" href="../index.html">puls</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
@@ -93,7 +93,12 @@ information such as terminal nodes, etc." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/vinhtantran/puls/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -108,12 +113,12 @@ information such as terminal nodes, etc." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Print PULS Clustering Results</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/vinhtantran/puls/blob/master/R/print.PULS.R'><code>R/print.PULS.R</code></a></small>
     <div class="hidden name"><code>print.PULS.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Render the <code>PULS</code> split tree in an easy to read format with important
+    <p>Render the PULS split tree in an easy to read format with important
 information such as terminal nodes, etc.</p>
     </div>
 
@@ -125,7 +130,7 @@ information such as terminal nodes, etc.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>PULS result object.</p></td>
+      <td><p>A <code>PULS</code> result object.</p></td>
     </tr>
     <tr>
       <th>spaces</th>
@@ -171,7 +176,7 @@ information such as terminal nodes, etc.</p>
 <span class='va'>intervals</span> <span class='op'>&lt;-</span>
   <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>Jan</span>, <span class='va'>Feb</span>, <span class='va'>Mar</span>, <span class='va'>Apr</span>, <span class='va'>May</span>, <span class='va'>Jun</span>, <span class='va'>Jul</span>, <span class='va'>Aug</span>, <span class='va'>Sep</span>, <span class='va'>Oct</span>, <span class='va'>Nov</span>, <span class='va'>Dec</span><span class='op'>)</span>
 
-<span class='va'>PULS4_pam</span> <span class='op'>&lt;-</span> <span class='fu'><a href='puls.html'>puls</a></span><span class='op'>(</span>toclust.fd <span class='op'>=</span> <span class='va'>yfd</span><span class='op'>$</span><span class='va'>fd</span>, intervals <span class='op'>=</span> <span class='va'>intervals</span>,
+<span class='va'>PULS4_pam</span> <span class='op'>&lt;-</span> <span class='fu'><a href='PULS.html'>PULS</a></span><span class='op'>(</span>toclust.fd <span class='op'>=</span> <span class='va'>yfd</span><span class='op'>$</span><span class='va'>fd</span>, intervals <span class='op'>=</span> <span class='va'>intervals</span>,
                   nclusters <span class='op'>=</span> <span class='fl'>4</span>, method <span class='op'>=</span> <span class='st'>"pam"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>PULS4_pam</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; n = 39 
@@ -187,9 +192,7 @@ information such as terminal nodes, etc.</p>
 #&gt;     6) Jul 13  463.8466   *
 #&gt;     7) Jul 11  371.2143   *
 #&gt; 
-#&gt; Note: One or more of the splits chosen had an alternative split that
-#&gt;         reduced inertia by the same amount. See "alt" column of "frame"
-#&gt;         object for details.</div><div class='input'><span class='co'># }</span>
+#&gt; Note: One or more of the splits chosen had an alternative split that reduced inertia by the same amount. See "alt" column of "frame" object for details.</div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

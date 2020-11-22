@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PULS Tree Object — PULS.object • PULS</title>
+<title>PULS Tree Object — PULS.object • puls</title>
 
 
 <!-- jquery -->
@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="PULS Tree Object — PULS.object" />
 <meta property="og:description" content="The structure and objects contained in PULS, an object returned from
-the puls() function and used as the input in other functions in the
+the PULS() function and used as the input in other functions in the
 package." />
 
 
@@ -73,7 +73,7 @@ package." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">PULS</a>
+        <a class="navbar-link" href="../index.html">puls</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
@@ -94,7 +94,12 @@ package." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/vinhtantran/puls/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -109,13 +114,13 @@ package." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>PULS Tree Object</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/vinhtantran/puls/blob/master/R/PULS.object.R'><code>R/PULS.object.R</code></a></small>
     <div class="hidden name"><code>PULS.object.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>The structure and objects contained in PULS, an object returned from
-the <code><a href='puls.html'>puls()</a></code> function and used as the input in other functions in the
+the <code><a href='PULS.html'>PULS()</a></code> function and used as the input in other functions in the
 package.</p>
     </div>
 
@@ -125,7 +130,7 @@ package.</p>
 
     
 <dl>
-<dt>frame</dt><dd><p>Data frame in the form of a <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> representing
+<dt>frame</dt><dd><p>Datas frame in the form of a <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code> representing
 a tree structure with one row for each node. The columns include:
 <dl>
 <dt>number</dt><dd><p>Index of the node. Depth of a node can be derived by
@@ -153,7 +158,7 @@ in inertia at that split.</p></dd></dl></p></dd>
 data, containing the value of <code>frame$number</code> corresponding to the leaf
 node that an observation falls into.</p></dd>
 <dt>dist</dt><dd><p>Distance matrix calculated using the method indicated in
-<code>distmethod</code> argument of <code><a href='puls.html'>puls()</a></code>.</p></dd>
+<code>distmethod</code> argument of <code><a href='PULS.html'>PULS()</a></code>.</p></dd>
 <dt>terms</dt><dd><p>Vector of subregion names in the data that were used to
 split.</p></dd>
 <dt>medoids</dt><dd><p>Named vector of positions of the data points regarded as
@@ -175,7 +180,7 @@ Analysis, 52(2), 687-701. doi: <a href='https://doi.org/10.1016/j.csda.2007.03.0
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='puls.html'>puls()</a></code>.</p></div>
+    <div class='dont-index'><p><code><a href='PULS.html'>PULS()</a></code>.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
