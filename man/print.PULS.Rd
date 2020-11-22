@@ -2,7 +2,7 @@
 % Please edit documentation in R/print.PULS.R
 \name{print.PULS}
 \alias{print.PULS}
-\title{Print PULS Clustering Results}
+\title{Print PULS Clustering Result}
 \usage{
 \method{print}{PULS}(x, spaces = 2L, digits = getOption("digits"), ...)
 }

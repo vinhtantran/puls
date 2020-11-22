@@ -12,15 +12,25 @@
 #'   are the beginning and ending indexes of of the interval.
 #' @param spliton Restrict the partitioning on a specific set of subregions.
 #' @param distmethod The method for calculating the distance matrix. Choose
-#'   between `usc` and `manual`.
+#'   between `"usc"` and `"manual"`. `"usc"` uses [fda.usc::metric.lp()]
+#'   function while `"manual"` uses squared distance between functions. See
+#'   [@details].
 #' @param labels The name of entities.
 #' @param nclusters The number of clusters.
 #' @param minbucket The minimum number of data points in one cluster allowed.
 #' @param minsplit The minimum size of a cluster that can still be considered to
 #'   be a split candidate.
 #'
+#' @details
+#' If choosing `distmethod = "manual"`, the L2 distance between all pairs of
+#'   functions \eqn{y_i(t)} and \eqn{y_j(t)} is given by:
+#' \deqn{d_R(y_i, y_j) = \sqrt{\int_{a_r}^{b_r} [y_i(t) - y_j(t)]^2 dt}.}
+#'
 #' @seealso [fda::is.fd()]
+#'
 #' @export
+#'
+#' @return A `PULS` object. See [PULS.object] for details.
 #'
 #' @examples
 #' \donttest{
@@ -105,14 +115,15 @@ PULS <- function(toclust.fd,
   cloc <- rep(1, nobs)
 
   # Set up the first cluster in cluster_frame
-  cluster_frame <- new_node(number = 1,
-                            var = "<leaf>",
-                            n = nobs,
-                            wt = sum(weights[members]),
-                            inertia = inertia_calc(dist[members, members]),
-                            inertia_explained = 0,
-                            medoid = medoid(members, dist),
-                            loc = 0.1)
+  cluster_frame <-
+    new_node(number = 1,
+             var = "<leaf>",
+             n = nobs,
+             wt = sum(weights[members]),
+             inertia = monoClust::inertia_calc(dist[members, members]),
+             inertia_explained = 0,
+             medoid = monoClust::medoid(members, dist),
+             loc = 0.1)
 
   done_running <- FALSE
   # This loop runs until we have nclusters, have exhausted our observations or
@@ -221,8 +232,8 @@ splitter <- function(toclust.fd, split_row, frame, cloc, dist, dsubs, dsubsname,
       var     = "<leaf>",
       n       = length(mems_a),
       wt      = sum(weights[mems_a]),
-      inertia = inertia_calc(dist[mems_a, mems_a]),
-      medoid  = medoid(mems_a, dist),
+      inertia = monoClust::inertia_calc(dist[mems_a, mems_a]),
+      medoid  = monoClust::medoid(mems_a, dist),
       loc     = frame$loc[split_row] - 1 / nrow(frame)
     )
 
@@ -233,8 +244,8 @@ splitter <- function(toclust.fd, split_row, frame, cloc, dist, dsubs, dsubsname,
       var     = "<leaf>",
       n       = length(mems_b),
       wt      = sum(weights[mems_b]),
-      inertia = inertia_calc(dist[mems_b, mems_b]),
-      medoid  = medoid(mems_b, dist),
+      inertia = monoClust::inertia_calc(dist[mems_b, mems_b]),
+      medoid  = monoClust::medoid(mems_b, dist),
       loc     = frame$loc[split_row] + 1 / nrow(frame)
     )
 
@@ -264,7 +275,7 @@ splitter <- function(toclust.fd, split_row, frame, cloc, dist, dsubs, dsubsname,
 #' @return The updated `frame_row` with the next split updated.
 #' @keywords internal
 find_split <- function(toclust.fd, frame_row, cloc, dist, dsubs, dsubsname,
-                      weights, minbucket, minsplit, spliton, method) {
+                       weights, minbucket, minsplit, spliton, method) {
 
   bycol <- numeric()
 
@@ -318,8 +329,8 @@ find_split <- function(toclust.fd, frame_row, cloc, dist, dsubs, dsubsname,
       # Turn inertia change to NA if min size of either group is smaller than
       # minbucket or total size is smaller than minsplit
       if (min(length(mems_a), length(mems_b)) >= minbucket) {
-        bycol <- cbind(bycol, inertia_calc(dist[mems_a, mems_a]) +
-                         inertia_calc(dist[mems_b, mems_b]))
+        bycol <- cbind(bycol, monoClust::inertia_calc(dist[mems_a, mems_a]) +
+                         monoClust::inertia_calc(dist[mems_b, mems_b]))
       } else {
         bycol <- cbind(bycol, NA)
       }
@@ -356,8 +367,8 @@ find_split <- function(toclust.fd, frame_row, cloc, dist, dsubs, dsubsname,
 
   # Calculate change in inertia
   inertiadel <- inertiap -
-    inertia_calc(dist[mems_a, mems_a]) -
-    inertia_calc(dist[mems_b, mems_b])
+    monoClust::inertia_calc(dist[mems_a, mems_a]) -
+    monoClust::inertia_calc(dist[mems_b, mems_b])
 
   ## Update frame
   frame_row$bipartsplitrow <- spliton[split[1]]
@@ -396,10 +407,11 @@ checkem <- function(toclust.fd, frame, cloc, dist, dsubs, dsubsname, weights,
                         frame$bipartsplitrow == -99L)
   # Split the best one
   frame[candidates, ] <-
-    purrr::map_dfr(candidates,
-                   ~ find_split(toclust.fd, frame[.x, ], cloc, dist, dsubs,
-                               dsubsname, weights, minbucket, minsplit, spliton,
-                               method))
+    purrr::map_dfr(
+      candidates,
+      ~ find_split(toclust.fd, frame[.x, ], cloc, dist, dsubs,
+                   dsubsname, weights, minbucket, minsplit, spliton,
+                   method))
 
   # See which ones are left
   candidates2 <- which(frame$var == "<leaf>" & frame$bipartsplitrow != 0L)

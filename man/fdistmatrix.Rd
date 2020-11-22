@@ -2,24 +2,31 @@
 % Please edit documentation in R/fdistmatrix.R
 \name{fdistmatrix}
 \alias{fdistmatrix}
-\title{Distance between Functional Objects}
+\title{Distance Between Functional Objects}
 \usage{
-fdistmatrix(yfd, subrange, distmethod)
+fdistmatrix(fd, subrange, distmethod)
 }
 \arguments{
-\item{yfd}{A functional data object as the result of \code{fda} package.}
+\item{fd}{A functional data object \code{fd} of \code{fda} package.}
 
 \item{subrange}{A vector of two values indicating the value range of
 functional object to calculate on.}
 
 \item{distmethod}{The method for calculating the distance matrix. Choose
-between \code{usc} and \code{manual}.}
+between \code{"usc"} and \code{"manual"}. \code{"usc"} uses \code{\link[fda.usc:metric.lp]{fda.usc::metric.lp()}}
+function while \code{"manual"} uses squared distance between functions. See
+\link{@details}.}
 }
 \value{
 A distance matrix with diagonal value and the upper half.
 }
 \description{
 Calculate the distance between functional objects over the defined range.
+}
+\details{
+If choosing \code{distmethod = "manual"}, the L2 distance between all pairs of
+functions \eqn{y_i(t)} and \eqn{y_j(t)} is given by:
+\deqn{d_R(y_i, y_j) = \sqrt{\int_{a_r}^{b_r} [y_i(t) - y_j(t)]^2 dt}.}
 }
 \examples{
 library(fda)

@@ -1,4 +1,4 @@
-#' Print PULS Clustering Results
+#' Print PULS Clustering Result
 #'
 #' Render the PULS split tree in an easy to read format with important
 #' information such as terminal nodes, etc.

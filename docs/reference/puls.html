@@ -161,7 +161,9 @@ are the beginning and ending indexes of of the interval.</p></td>
     <tr>
       <th>distmethod</th>
       <td><p>The method for calculating the distance matrix. Choose
-between <code>usc</code> and <code>manual</code>.</p></td>
+between <code>"usc"</code> and <code>"manual"</code>. <code>"usc"</code> uses <code><a href='https://rdrr.io/pkg/fda.usc/man/metric.lp.html'>fda.usc::metric.lp()</a></code>
+function while <code>"manual"</code> uses squared distance between functions. See
+@details.</p></td>
     </tr>
     <tr>
       <th>labels</th>
@@ -182,6 +184,14 @@ be a split candidate.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code>PULS</code> object. See <a href='PULS.object.html'>PULS.object</a> for details.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If choosing <code>distmethod = "manual"</code>, the L2 distance between all pairs of
+functions \(y_i(t)\) and \(y_j(t)\) is given by:
+$$d_R(y_i, y_j) = \sqrt{\int_{a_r}^{b_r} [y_i(t) - y_j(t)]^2 dt}.$$</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/fda/man/is.fd.html'>fda::is.fd()</a></code></p></div>

@@ -29,7 +29,9 @@ are the beginning and ending indexes of of the interval.}
 \item{spliton}{Restrict the partitioning on a specific set of subregions.}
 
 \item{distmethod}{The method for calculating the distance matrix. Choose
-between \code{usc} and \code{manual}.}
+between \code{"usc"} and \code{"manual"}. \code{"usc"} uses \code{\link[fda.usc:metric.lp]{fda.usc::metric.lp()}}
+function while \code{"manual"} uses squared distance between functions. See
+\link{@details}.}
 
 \item{labels}{The name of entities.}
 
@@ -40,10 +42,18 @@ between \code{usc} and \code{manual}.}
 \item{minsplit}{The minimum size of a cluster that can still be considered to
 be a split candidate.}
 }
+\value{
+A \code{PULS} object. See \link{PULS.object} for details.
+}
 \description{
 PULS function for functional data (only used when you know that the data
 shouldn't be converted into functional because it's already smooth, e.g.
 your data are step function)
+}
+\details{
+If choosing \code{distmethod = "manual"}, the L2 distance between all pairs of
+functions \eqn{y_i(t)} and \eqn{y_j(t)} is given by:
+\deqn{d_R(y_i, y_j) = \sqrt{\int_{a_r}^{b_r} [y_i(t) - y_j(t)]^2 dt}.}
 }
 \examples{
 \donttest{
