@@ -14,12 +14,14 @@
 #' @param distmethod The method for calculating the distance matrix. Choose
 #'   between `"usc"` and `"manual"`. `"usc"` uses [fda.usc::metric.lp()]
 #'   function while `"manual"` uses squared distance between functions. See
-#'   [@details].
+#'   Details.
 #' @param labels The name of entities.
 #' @param nclusters The number of clusters.
 #' @param minbucket The minimum number of data points in one cluster allowed.
 #' @param minsplit The minimum size of a cluster that can still be considered to
 #'   be a split candidate.
+#'
+#' @return A `PULS` object. See [PULS.object] for details.
 #'
 #' @details
 #' If choosing `distmethod = "manual"`, the L2 distance between all pairs of
@@ -29,8 +31,6 @@
 #' @seealso [fda::is.fd()]
 #'
 #' @export
-#'
-#' @return A `PULS` object. See [PULS.object] for details.
 #'
 #' @examples
 #' \donttest{
