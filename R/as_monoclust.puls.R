@@ -19,15 +19,25 @@ as_MonoClust.PULS <- function(x, ...) {
   if (is.null(x$frame))
     stop("Object needs a \"frame\". See PULS.object for details.")
 
+  required_obj <- c("membership", "dist", "terms", "medoids", "alt")
+
+  if (any(is.na(match(required_obj, names(x)))))
+    stop("Object must have required objects. See PULS.object for details.")
+
   frame <- x$frame
   if (!is.data.frame(frame))
     stop("\"frame\" object must be a data.frame or a data.frame derivation.")
 
   required_cols <- c("number", "var", "n", "inertia", "bipartsplitrow",
-  "bipartsplitcol", "inertiadel", "medoid", "loc", "inertia_explained", "alt")
+                     "bipartsplitcol", "inertiadel", "medoid", "loc",
+                     "inertia_explained", "alt")
 
   if (any(is.na(match(required_cols, colnames(frame)))))
-    stop("\"frame\" must have required columns. See PULS.object for details.")
+    stop(paste("\"frame\" must have required columns. See PULS.object for",
+               "details."))
+
+
+
 
   # Add missing columns
   frame <-
