@@ -8,17 +8,17 @@ test_that("correct new node with default values", {
                         loc = 0.1,
                         alt = FALSE),
                tibble::tibble(number = 1,
-                      var = "<leaf>",
-                      n = 30,
-                      wt = 10,
-                      inertia = 10000,
-                      bipartsplitrow = -99L,
-                      bipartsplitcol = -99L,
-                      inertiadel = 0,
-                      inertia_explained = -99,
-                      medoid = 2,
-                      loc = 0.1,
-                      alt = FALSE))
+                              var = "<leaf>",
+                              n = 30,
+                              wt = 10,
+                              inertia = 10000,
+                              bipartsplitrow = -99L,
+                              bipartsplitcol = -99L,
+                              inertiadel = 0,
+                              inertia_explained = -99,
+                              medoid = 2,
+                              loc = 0.1,
+                              alt = FALSE))
 })
 
 test_that("correct new node with not default values", {
