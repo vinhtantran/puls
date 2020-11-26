@@ -31,7 +31,7 @@ are the beginning and ending indexes of of the interval.}
 \item{distmethod}{The method for calculating the distance matrix. Choose
 between \code{"usc"} and \code{"manual"}. \code{"usc"} uses \code{\link[fda.usc:metric.lp]{fda.usc::metric.lp()}}
 function while \code{"manual"} uses squared distance between functions. See
-\link{@details}.}
+Details.}
 
 \item{labels}{The name of entities.}
 

@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.com/vinhtantran/puls.svg?branch=master)](https://travis-ci.com/vinhtantran/puls)
+status](https://travis-ci.org/vinhtantran/puls.svg?branch=master)](https://travis-ci.org/vinhtantran/puls)
 [![R-CMD-check](https://github.com/vinhtantran/puls/workflows/R-CMD-check/badge.svg)](https://github.com/vinhtantran/puls/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/puls)](https://CRAN.R-project.org/package=puls)
