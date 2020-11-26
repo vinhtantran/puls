@@ -16,8 +16,6 @@
 #' @return A ggplot2 object.
 #' @export
 #'
-#' @importFrom rlang .data
-#'
 #' @examples
 #' \donttest{
 #' library(fda)

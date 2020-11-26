@@ -8,9 +8,10 @@
 #' @param ... For extensibility.
 #'
 #' @return A MonoClust object coerced from PULS object.
-#' @export
 #'
-#' @importFrom dplyr `%>%`
+#' @importFrom monoClust as_MonoClust
+#'
+#' @export
 #'
 #' @seealso [monoClust::MonoClust.object] and [PULS.object]
 as_MonoClust.PULS <- function(x, ...) {
@@ -35,9 +36,6 @@ as_MonoClust.PULS <- function(x, ...) {
   if (any(is.na(match(required_cols, colnames(frame)))))
     stop(paste("\"frame\" must have required columns. See PULS.object for",
                "details."))
-
-
-
 
   # Add missing columns
   frame <-

@@ -27,8 +27,6 @@
 #'
 #' @return A plot of splitting order.
 #'
-#' @import monoClust
-#'
 #' @export
 #'
 #' @examples
