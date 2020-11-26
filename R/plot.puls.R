@@ -68,9 +68,6 @@ plot.PULS <- function(x,
                       cols = NULL, col.type = c("l", "p", "b"),
                       ...) {
 
-  if (!inherits(x, "PULS"))
-    stop("Not a PULS object.")
-
   coerced_mono <- as_MonoClust.PULS(x)
 
   plot(coerced_mono,

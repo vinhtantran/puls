@@ -44,9 +44,6 @@
 #' }
 print.PULS <- function(x, spaces = 2L, digits = getOption("digits"), ...) {
 
-  if (!inherits(x, "PULS"))
-    stop("Not a legitimate PULS object.")
-
   coerced_mono <- as_MonoClust.PULS(x)
 
   print(coerced_mono, spaces = spaces, digits = digits, ...)
