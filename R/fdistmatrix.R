@@ -20,7 +20,7 @@
 #' # Examples taken from fda::Data2fd()
 #' data(gait)
 #' # Function only works on two dimensional data
-#' gait <- gait[, , 1]
+#' gait <- gait[, 1:5, 1]
 #' gaitbasis3 <- create.fourier.basis(nbasis = 5)
 #' gaitfd3 <- Data2fd(gait, basisobj = gaitbasis3)
 #'
@@ -28,7 +28,7 @@
 fdistmatrix <- function(fd, subrange, distmethod) {
 
   if (!fda::is.fd(fd))
-    stop("\"fd\" must be a functional data object (checked with fda::is.fd).")
+    stop("\"fd\" must be of class \"fd\"")
 
   n <- length(fd$fdnames$reps)
   y_dist <- matrix(0, nrow = n, ncol = n)
@@ -56,6 +56,7 @@ fdistmatrix <- function(fd, subrange, distmethod) {
     }
 
     y_dist <- as.matrix(stats::as.dist(t(y_dist), upper = T, diag = T))
+    colnames(y_dist) <- rownames(y_dist) <- fd$fdnames$reps
   }
 
   return(y_dist)
