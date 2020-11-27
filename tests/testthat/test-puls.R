@@ -71,5 +71,3 @@ test_that("calling puls with ward method", {
   },
   "2) Jul 15  885.3640 0.8431711 ")
 })
-
-

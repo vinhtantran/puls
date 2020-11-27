@@ -8,7 +8,7 @@ test_that("error for fdistmatrix", {
     x <- sin(4 * pi * argvals)
     #  Add independent Gaussian errors with std. dev. 0.2 to the true values
     sigerr <- 0.2
-    y = x + rnorm(x) * sigerr
+    y <- x + rnorm(x) * sigerr
     #  When we ran this code, we got these values of y (rounded to two
     #  decimals):
     y <- c(0.27,  0.05,  0.58,  0.91,  1.07,  0.98,  0.54,  0.94,  1.13,  0.64,
@@ -24,7 +24,7 @@ test_that("error for fdistmatrix", {
     #  Smooth the data, outputting only the functional data object for the
     #  fitted curve.  Note that in this simple case we can supply the basis
     #  object as the "fdParobj" parameter
-    ys = fda::smooth.basis(argvals = argvals, y = y, fdParobj = basisobj)
+    ys <- fda::smooth.basis(argvals = argvals, y = y, fdParobj = basisobj)
     fdistmatrix(ys)
   }, "\"fd\" must be of class \"fd\"")
 })
@@ -40,8 +40,7 @@ test_that("fdistmatrix is correct with usc", {
 
     a <- fdistmatrix(gaitfd3, c(0.2, 0.4), "usc")
     signif(a, 7)
-  },
-  {
+  }, {
     b <- matrix(c(0.000000, 1.508725, 2.702666, 2.959672, 6.555149,
                   1.508725, 0.000000, 2.089777, 3.740105, 7.326595,
                   2.702666, 2.089777, 0.000000, 5.570693, 9.180862,

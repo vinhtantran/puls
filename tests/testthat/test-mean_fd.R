@@ -1,7 +1,7 @@
 test_that("correct mean fd calculation", {
   expect_equal({
     bspl4 <- fda::create.bspline.basis(nbasis = 4)
-    parab4.5 <- fda::fd(c(3, -1, -1, 3)/3, bspl4)
+    parab4.5 <- fda::fd(c(3, -1, -1, 3) / 3, bspl4)
     mean_fd(parab4.5)
   }, 1)
 })
@@ -14,7 +14,7 @@ test_that("incorrect data are transferred", {
     x <- sin(4 * pi * argvals)
     #  Add independent Gaussian errors with std. dev. 0.2 to the true values
     sigerr <- 0.2
-    y = x + rnorm(x) * sigerr
+    y <- x + rnorm(x) * sigerr
     #  When we ran this code, we got these values of y (rounded to two
     #  decimals):
     y <- c(0.27,  0.05,  0.58,  0.91,  1.07,  0.98,  0.54,  0.94,  1.13,  0.64,
@@ -30,8 +30,7 @@ test_that("incorrect data are transferred", {
     #  Smooth the data, outputting only the functional data object for the
     #  fitted curve.  Note that in this simple case we can supply the basis
     #  object as the "fdParobj" parameter
-    ys = fda::smooth.basis(argvals = argvals, y = y, fdParobj = basisobj)
+    ys <- fda::smooth.basis(argvals = argvals, y = y, fdParobj = basisobj)
     mean_fd(ys)
   }, "'x' is not of class 'fd'")
 })
-

@@ -3,12 +3,16 @@ library(readr)
 library(dplyr)
 library(magrittr)
 
-arctic_raw_colnames <- read_csv("ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/daily/data/N_seaice_extent_daily_v3.0.csv",
-                       col_names = TRUE) %>%
+arctic_raw_colnames <-
+  read_csv(paste0("ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/daily/",
+                  "data/N_seaice_extent_daily_v3.0.csv"),
+           col_names = TRUE) %>%
   colnames()
 
-arctic <- read_csv("ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/daily/data/N_seaice_extent_daily_v3.0.csv",
-                   col_names = FALSE, skip = 2) %>%
+arctic <-
+  read_csv(paste0("ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/daily/",
+                  "data/N_seaice_extent_daily_v3.0.csv"),
+           col_names = FALSE, skip = 2) %>%
   set_colnames(arctic_raw_colnames)
 
 arctic_2019 <- arctic %>%

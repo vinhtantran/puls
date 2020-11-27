@@ -37,15 +37,16 @@ Imports:
     tibble (>= 3.0.0),
     tidyr (>= 1.0.0)
 Suggests: 
-    lubridate,
-    testthat,
     covr,
-    vdiffr,
     knitr,
-    rmarkdown
+    lubridate,
+    rmarkdown,
+    testthat,
+    vdiffr
+VignetteBuilder: 
+    knitr
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Config/testthat/edition: 3
-VignetteBuilder: knitr
