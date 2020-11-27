@@ -42,3 +42,4 @@ vignettes/*.pdf
 po/*~
 
 .DS_Store
+inst/doc
