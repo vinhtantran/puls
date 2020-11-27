@@ -42,7 +42,7 @@ as_MonoClust.PULS <- function(x, ...) {
     frame %>%
     tibble::add_column(cut = NA,
                        split.order = NA) %>%
-    dplyr::select(all_of(required_cols), cut, split.order)
+    dplyr::select(dplyr::all_of(required_cols), "cut", "split.order")
 
   MonoClust_obj <-
     list(frame = frame,

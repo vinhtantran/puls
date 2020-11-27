@@ -8,14 +8,15 @@
 [![Travis build
 status](https://travis-ci.org/vinhtantran/puls.svg?branch=master)](https://travis-ci.org/vinhtantran/puls)
 [![R-CMD-check](https://github.com/vinhtantran/puls/workflows/R-CMD-check/badge.svg)](https://github.com/vinhtantran/puls/actions)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/puls)](https://CRAN.R-project.org/package=puls)
-[![metacran
-downloads](https://cranlogs.r-pkg.org/badges/puls)](https://cran.r-project.org/package=puls)
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/puls)](https://CRAN.R-project.org/package=puls) -->
+<!-- [![metacran downloads](https://cranlogs.r-pkg.org/badges/puls)](https://cran.r-project.org/package=puls) -->
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Codecov test
 coverage](https://codecov.io/gh/vinhtantran/puls/branch/master/graph/badge.svg)](https://codecov.io/gh/vinhtantran/puls?branch=master)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- badges: end -->
 
 Partitioning using local subregions (PULS) is a clustering technique
@@ -75,7 +76,6 @@ intervals <-
 
 PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
                   nclusters = 4, method = "pam")
-#> Warning: executing %dopar% sequentially: no parallel backend registered
 PULS4_pam
 #> n = 39 
 #> 
