@@ -42,9 +42,10 @@ fdistmatrix <- function(fd, subrange, distmethod) {
     predfd <- fda::predict.fd(fd, t_high)
     fdata <- fda.usc::fdata(mdata = t(predfd), argvals = t_high)
 
-    y_dist <- as.matrix(stats::as.dist(fda.usc::metric.lp(fdata),
-                                       diag = T,
-                                       upper = T))
+    y_dist <-
+      suppressWarnings(as.matrix(stats::as.dist(fda.usc::metric.lp(fdata),
+                                                diag = T,
+                                                upper = T)))
   } else {
     for (j1 in seq_len(n - 1)) {
       fdfirst <- fd[j1]

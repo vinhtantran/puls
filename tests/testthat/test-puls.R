@@ -23,23 +23,53 @@ intervals <-
   rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 
 test_that("calling puls wrongly creates correct errors", {
-  expect_error({
+  testthat::expect_error({
     PULS()
   },
   "\"toclust.fd\" must be a functional data object (fda::is.fd).",
   fixed = TRUE)
 
-  expect_error({
+  testthat::expect_error({
     PULS("hello")
   },
   "\"toclust.fd\" must be a functional data object (fda::is.fd).",
   fixed = TRUE)
 
-  expect_error({
+  testthat::expect_error({
     PULS(yfd$fd, minbucket = 5, minsplit = 2)
   },
   "\"minbucket\" must be less than \"minsplit\".",
   fixed = TRUE)
+})
+
+test_that("calling puls correctly in a popular case", {
+  skip_on_cran()
+  testthat::expect_s3_class({
+    PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
+                      nclusters = 4, method = "pam")
+  },
+  "PULS")
+})
+
+test_that("calling puls when intervals don't have names", {
+  skip_on_cran()
+  testthat::expect_output({
+    rownames(intervals) <- NULL
+    PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
+                      nclusters = 4, method = "pam")
+    print(PULS4_pam)
+  },
+  "2) 7 15  885.3640 0.8431711")
+})
+
+test_that("calling puls with ward method", {
+  skip_on_cran()
+  testthat::expect_output({
+    PULS4_pam <- PULS(toclust.fd = yfd$fd, intervals = intervals,
+                      nclusters = 4, method = "ward")
+    print(PULS4_pam)
+  },
+  "2) Jul 15  885.3640 0.8431711 ")
 })
 
 
