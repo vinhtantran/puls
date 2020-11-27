@@ -27,8 +27,6 @@
 #'
 #' @return A plot of splitting order.
 #'
-#' @import monoClust
-#'
 #' @export
 #'
 #' @examples
@@ -69,9 +67,6 @@ plot.PULS <- function(x,
                       digits = getOption("digits") - 2,
                       cols = NULL, col.type = c("l", "p", "b"),
                       ...) {
-
-  if (!inherits(x, "PULS"))
-    stop("Not a PULS object.")
 
   coerced_mono <- as_MonoClust.PULS(x)
 

@@ -14,6 +14,8 @@ status](https://www.r-pkg.org/badges/version/puls)](https://CRAN.R-project.org/p
 downloads](https://cranlogs.r-pkg.org/badges/puls)](https://cran.r-project.org/package=puls)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Codecov test
+coverage](https://codecov.io/gh/vinhtantran/puls/branch/master/graph/badge.svg)](https://codecov.io/gh/vinhtantran/puls?branch=master)
 <!-- badges: end -->
 
 Partitioning using local subregions (PULS) is a clustering technique

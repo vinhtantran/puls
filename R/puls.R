@@ -73,7 +73,7 @@ PULS <- function(toclust.fd,
                  minsplit = 4) {
 
   ## Ensure that important options make sense
-  if (!fda::is.fd(toclust.fd))
+  if (missing(toclust.fd) || !fda::is.fd(toclust.fd))
     stop("\"toclust.fd\" must be a functional data object (fda::is.fd).")
 
   if (minbucket >= minsplit) {

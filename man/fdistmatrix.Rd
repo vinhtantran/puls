@@ -33,7 +33,7 @@ library(fda)
 # Examples taken from fda::Data2fd()
 data(gait)
 # Function only works on two dimensional data
-gait <- gait[, , 1]
+gait <- gait[, 1:5, 1]
 gaitbasis3 <- create.fourier.basis(nbasis = 5)
 gaitfd3 <- Data2fd(gait, basisobj = gaitbasis3)
 
