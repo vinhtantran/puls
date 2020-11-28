@@ -70,14 +70,14 @@ plot.PULS <- function(x,
 
   coerced_mono <- as_MonoClust.PULS(x)
 
-  plot(coerced_mono,
-       branch = branch,
-       margin = margin,
-       text = text,
-       which = which,
-       digits = digits,
-       cols = cols,
-       ...)
+  graphics::plot(coerced_mono,
+                 branch = branch,
+                 margin = margin,
+                 text = text,
+                 which = which,
+                 digits = digits,
+                 cols = cols,
+                 ...)
 
   return(invisible(x))
 }

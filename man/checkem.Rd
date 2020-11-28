@@ -33,7 +33,7 @@ three-dimensional matrix.}
 
 \item{dsubsname}{Subregion names.}
 
-\item{weights}{(Currentlt unused) Weights on observations.}
+\item{weights}{(Currently unused) Weights on observations.}
 
 \item{minbucket}{The minimum number of data points in one cluster allowed.}
 

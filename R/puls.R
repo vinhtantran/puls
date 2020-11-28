@@ -390,7 +390,7 @@ find_split <- function(toclust.fd, frame_row, cloc, dist, dsubs, dsubsname,
 #' @param dsubs Distance matrix calculated on each subregion. A
 #'   three-dimensional matrix.
 #' @param dsubsname Subregion names.
-#' @param weights (Currentlt unused) Weights on observations.
+#' @param weights (Currently unused) Weights on observations.
 #' @param minsplit The minimum number of observations that must exist in a node
 #'   in order for a split to be attempted.
 #' @inheritParams PULS

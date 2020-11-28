@@ -34,7 +34,7 @@ In some functional data applications, there is pre-existing knowledge of regions
 $$d_R(y_i, y_j) = \sqrt{\int_{a_r}^{b_r} [y_i(t) – y_j(t)]^2 dt}$$
 and obtain a dissimilarity matrix for each subregion, $r = 1, \ldots, R$. Adapting the idea of the monothetic clustering algorithm, each subregion is separately considered as a splitting candidate for the next 2-group partitioning, using commonly used clustering techniques such as $k$-means (MacQueen, 1967), Ward’s method (Ward, 1963), or partitioning around medoids (PAM, Kaufman and Rousseeuw, 1990). An inertia-like criterion is again used as the global criterion for selecting each split. Among the $K$ candidate splits, one from each subregion, the one having the largest decrease in inertia will be chosen as the best split. The algorithm is then recursively applied to the resulting sub-partitions until a specified number of partitions is reached or a stopping rule is met. 
 
-The PULS algorithm was inspired by [monothetic clustering](https://cran.r-project.org/web/packages/monoClust/index.html) and shares many features such as inertia as the global criterion, a recursive bi-partitioning method, and the same stopping rules. However, the idea and applications of PULS are different enough to store in a separate `R` package, which we named **puls**. Indeed, **puls** borrows many private functions from **monoClust** such as the splitting rule tree, recursively checking for the best splitting subregion, tree-based displays of results, etc. An example of a usage of the main function of the package, `PULS`, to the Arctic ice extent data with subregions defined by months follows.
+The PULS algorithm was inspired by monothetic clustering and shares many features such as inertia as the global criterion, a recursive bi-partitioning method, and the same stopping rules. However, the idea and applications of PULS are different enough to store in a separate `R` package, which we named **puls**. Indeed, **puls** borrows many private functions from **monoClust** (Tran et al., 2020) such as the splitting rule tree, recursively checking for the best splitting subregion, tree-based displays of results, etc. An example of a usage of the main function of the package, `PULS`, to the Arctic ice extent data with subregions defined by months follows.
 
 ```{r step6v}
 library(fda)
@@ -90,20 +90,21 @@ print(constrained_PULS)
 
 ## Bibliography
 
-* Chavent, M. (1998). "A monothetic clustering method". In: *Pattern Recognition Letters* 19.11, pp. 989{996. issn: 01678655. <doi:10.1016/S0167-8655(98)00087-7>.
-* Everitt, B. and T. Hothorn (2011). *An Introduction to Applied Multivariate Analysis with R*. 1st ed. Springer. <isbn:1441996494>.
+* Chavent, M. (1998). "A monothetic clustering method". In: *Pattern Recognition Letters* 19.11, pp. 989{996. issn: 01678655. \doi{10.1016/S0167-8655(98)00087-7}.
+* Everitt, B. and T. Hothorn (2011). *An Introduction to Applied Multivariate Analysis with R*. 1st ed. Springer. isbn: 1441996494.
 * Febrero-Bande, M. and M. O. de la Fuente (2012). "Statistical Computing in Functional Data Analysis: The R Package fda.usc". In: *Journal of Statistical Software* 51.4, pp. 1-28.
-* Fetterer, F., F. Knowles, W. Meier, M. Savoie, and A. K. Windnagel (2020). Sea Ice Index, Version 3. <doi:10.7265/N5K072F8>. https://nsidc.org/data/g02135 (visited on 2020).
+* Fetterer, F., F. Knowles, W. Meier, M. Savoie, and A. K. Windnagel (2020). Sea Ice Index, Version 3. \doi{10.7265/N5K072F8}. https://nsidc.org/data/g02135 (visited on 2020).
 * Greenwood, M. C., R. S. Sojda, J. L. Sharp, R. G. Peck, and D. O. Rosenberry (2011). "Multi-scale Clustering of Functional Data with Application to Hydraulic Gradients in Wetlands". In: *Journal of Data Science* 9.3, pp. 399-426.
-* Kaufman, L. and P. J. Rousseeuw (1990). *Finding Groups in Data: An Introduction to Cluster Analysis*. 1st ed. Wiley-Interscience, p. 368. <isbn:978-0471735786>.
-* MacNaughton-Smith, P., W. T. Williams, M. B. Dale, and L. G. Mockett (1964). "Dissimilarity Analysis: a new Technique of Hierarchical Sub-division". In: *Nature* 202.4936, pp. 1034-1035. issn: 0028-0836. <doi:10.1038/2021034a0>.
+* Kaufman, L. and P. J. Rousseeuw (1990). *Finding Groups in Data: An Introduction to Cluster Analysis*. 1st ed. Wiley-Interscience, p. 368. isbn: 978-0471735786.
+* MacNaughton-Smith, P., W. T. Williams, M. B. Dale, and L. G. Mockett (1964). "Dissimilarity Analysis: a new Technique of Hierarchical Sub-division". In: *Nature* 202.4936, pp. 1034-1035. issn: 0028-0836. \doi{10.1038/2021034a0}.
 * MacQueen, J. (1967). *Some methods for classification and analysis of multivariate observations*. Berkeley, Calif. 
-* Murtagh, F. and P. Legendre (2014). "Ward's Hierarchical Agglomerative Clustering Method: Which Algorithms Implement Ward's Criterion?" In: *Journal of Classification* 31.3, pp. 274-295. issn: 0176-4268. <doi:10.1007/s00357-014-9161-z.34>
-* Piccarreta, R. and F. C. Billari (2007). "Clustering work and family trajectories by using a divisive algorithm". In: *Journal of the Royal Statistical Society: Series A (Statistics in Society)* 170.4, pp. 1061-1078. issn: 0964-1998. <doi:10.1111/j.1467-985X.2007.00495.x>.
+* Murtagh, F. and P. Legendre (2014). "Ward's Hierarchical Agglomerative Clustering Method: Which Algorithms Implement Ward's Criterion?" In: *Journal of Classification* 31.3, pp. 274-295. issn: 0176-4268. \doi{10.1007/s00357-014-9161-z.34}
+* Piccarreta, R. and F. C. Billari (2007). "Clustering work and family trajectories by using a divisive algorithm". In: *Journal of the Royal Statistical Society: Series A (Statistics in Society)* 170.4, pp. 1061-1078. issn: 0964-1998. \doi{10.1111/j.1467-985X.2007.00495.x}.
 * R Core Team (2020). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing. Vienna, Austria. https://www.R-project.org/.
-* Ramsay, J. O. and B. W. Silverman (2005). *Functional data analysis*. Springer, p. 426. <isbn: 9780387400808>.
+* Ramsay, J. O. and B. W. Silverman (2005). *Functional data analysis*. Springer, p. 426. isbn:  9780387400808.
 * Ramsay, J. O., H. Wickham, S. Graves, and G. Hooker (2018). *fda: Functional Data Analysis*. R package version 2.4.8.
-* Sneath, P. H. A. and R. R. Sokal (1973). *Numerical taxonomy: the principles and practice of numerical classification*. W.H. Freeman, p. 573. <isbn:0716706970>.
+* Sneath, P. H. A. and R. R. Sokal (1973). *Numerical taxonomy: the principles and practice of numerical classification*. W.H. Freeman, p. 573. isbn: 0716706970.
+* Tan Tran, Brian McGuire, and Mark Greenwood (2020). *monoClust: Perform Monothetic Clustering with Extensions to Circular Data*. R package version 1.2.0. https://CRAN.R-project.org/package=monoClust
 * Tuddenham, R. D. and M. M. Snyder (1954). "Physical growth of California boys and girls from birth to eighteen years." In: *Publications in child development. University of California, Berkeley* 1.2, pp. 183-364.
-* Ward, J. H. (1963). "Hierarchical Grouping to Optimize an Objective Function". In: *Journal of the American Statistical Association* 58.301, pp. 236--244. issn: 0162-1459. <doi:10.1080/01621459.1963.10500845>.
+* Ward, J. H. (1963). "Hierarchical Grouping to Optimize an Objective Function". In: *Journal of the American Statistical Association* 58.301, pp. 236--244. issn: 0162-1459. \doi{10.1080/01621459.1963.10500845}.
 

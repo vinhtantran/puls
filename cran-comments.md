@@ -1,10 +1,21 @@
 ## Test environments
-* local R installation, R 4.0.3
-* ubuntu 16.04 (on travis-ci), R 4.0.3
-* win-builder (devel)
+- R-hub windows-x86_64-devel (r-devel)
+- R-hub ubuntu-gcc-release (r-release)
+- R-hub fedora-clang-devel (r-devel)
 
 ## R CMD check results
+> On windows-x86_64-devel (r-devel), ubuntu-gcc-release (r-release), fedora-clang-devel (r-devel)
+  checking CRAN incoming feasibility ... NOTE
+  
+  New submission
+  Maintainer: 'Tan Tran <vinhtantran@gmail.com>'
 
-0 errors | 0 warnings | 1 note
+> On ubuntu-gcc-release (r-release)
+  checking package dependencies ... NOTE
+  Packages suggested but not available for checking: 'covr', 'vdiffr'
 
-* This is a new release.
+0 errors √ | 0 warnings √ | 2 notes x
+
+Explanations:
+* New submission
+* covr and vdiffr are used for unit testing of plotting functions. They are monitoring packages and shouldn't cause R CMD check failures on the CRAN machines.

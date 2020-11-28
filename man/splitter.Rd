@@ -33,7 +33,7 @@ three-dimensional matrix.}
 
 \item{dsubsname}{Subregion names.}
 
-\item{weights}{(Currentlt unused) Weights on observations.}
+\item{weights}{(Currently unused) Weights on observations.}
 
 \item{method}{The clustering method you want to run in each subregion. Can be
 chosen between \code{pam} and \code{ward}.}
