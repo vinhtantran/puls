@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "puls",
   "description": "Partitioning using local subregions (PULS) is a\n    clustering technique designed to explore subregions of functional data\n    for information to split the curves into clusters.",
@@ -46,6 +49,30 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
+      "identifier": "covr",
+      "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=covr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "lubridate",
       "name": "lubridate",
       "provider": {
@@ -58,6 +85,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
       "provider": {
@@ -67,18 +106,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=testthat"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "covr",
-      "name": "covr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=covr"
     },
     {
       "@type": "SoftwareApplication",
@@ -259,8 +286,12 @@
   ],
   "releaseNotes": "https://github.com/vinhtantran/puls/blob/master/NEWS.md",
   "readme": "https://github.com/vinhtantran/puls/blob/master/README.md",
-  "fileSize": "2155.466KB",
-  "contIntegration": ["https://travis-ci.org/vinhtantran/puls", "https://codecov.io/gh/vinhtantran/puls?branch=master"],
-  "developmentStatus": "https://www.tidyverse.org/lifecycle/#maturing",
-  "keywords": ["monothetic", "functional-data-analysis", "clustering"]
+  "fileSize": "2179.149KB",
+  "contIntegration": ["https://codecov.io/gh/vinhtantran/puls?branch=master", "https://travis-ci.org/vinhtantran/puls"],
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "keywords": [
+    "monothetic",
+    "functional-data-analysis",
+    "clustering"
+  ]
 }
