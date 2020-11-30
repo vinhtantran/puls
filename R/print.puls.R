@@ -6,7 +6,7 @@
 #' @param x A `PULS` result object.
 #' @param spaces Spaces indent between 2 tree levels.
 #' @param digits Number of significant digits to print.
-#' @param ... Further arguments passed to or from other methods.
+#' @param ... Arguments to be passed to [monoClust::print.MonoClust()].
 #'
 #' @return A nicely displayed PULS split tree in text.
 #'

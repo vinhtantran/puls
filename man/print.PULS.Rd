@@ -13,7 +13,7 @@
 
 \item{digits}{Number of significant digits to print.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Arguments to be passed to \code{\link[monoClust:print.MonoClust]{monoClust::print.MonoClust()}}.}
 }
 \value{
 A nicely displayed PULS split tree in text.
