@@ -101,7 +101,13 @@
 <p>The PULS algorithm was inspired by monothetic clustering and shares many features such as inertia as the global criterion, a recursive bi-partitioning method, and the same stopping rules. However, the idea and applications of PULS are different enough to store in a separate <code>R</code> package, which we named <strong>puls</strong>. Indeed, <strong>puls</strong> borrows many private functions from <strong>monoClust</strong> (Tran et al., 2020) such as the splitting rule tree, recursively checking for the best splitting subregion, tree-based displays of results, etc. An example of a usage of the main function of the package, <code>PULS</code>, to the Arctic ice extent data with subregions defined by months follows.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.functionaldata.org">fda</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: splines</span>
 <span class="co">#&gt; Loading required package: Matrix</span>
+<span class="co">#&gt; Loading required package: fds</span>
+<span class="co">#&gt; Loading required package: rainbow</span>
+<span class="co">#&gt; Loading required package: MASS</span>
+<span class="co">#&gt; Loading required package: pcaPP</span>
+<span class="co">#&gt; Loading required package: RCurl</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'fda'</span>
 <span class="co">#&gt; The following object is masked from 'package:graphics':</span>
