@@ -19,3 +19,4 @@
 Explanations:
 * New submission
 * covr and vdiffr are used for unit testing of plotting functions. They are monitoring packages and shouldn't cause R CMD check failures on the CRAN machines.
+* Rewrite the DESCRIPTION's Description field to address reviewer's comment on not to start it with the package name. There is currently no references in the Description.

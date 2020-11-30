@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "puls",
-  "description": "Partitioning using local subregions (PULS) is a\n    clustering technique designed to explore subregions of functional data\n    for information to split the curves into clusters.",
+  "description": "A method of clustering functional data using\n    subregion information of the curves. It is intended to supplement the\n    'fda' and 'fda.usc' packages in functional data object clustering. It\n    also facilitates the printing and plotting of the results in a tree\n    format and limits the partitioning candidates into a specific set of\n    subregions.",
   "name": "puls: Partitioning Using Local Subregions",
   "codeRepository": "https://github.com/vinhtantran/puls",
   "relatedLink": "https://vinhtantran.github.io/puls/",
@@ -285,8 +285,7 @@
     }
   ],
   "releaseNotes": "https://github.com/vinhtantran/puls/blob/master/NEWS.md",
-  "readme": "https://github.com/vinhtantran/puls/blob/master/README.md",
-  "fileSize": "2179.149KB",
+  "fileSize": "2180.767KB",
   "contIntegration": ["https://codecov.io/gh/vinhtantran/puls?branch=master", "https://travis-ci.org/vinhtantran/puls"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": [
