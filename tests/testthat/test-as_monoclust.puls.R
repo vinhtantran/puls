@@ -3,7 +3,7 @@ test_that("print error when coercing wrong PULS class to MonoClust class", {
     a <- list(test = 1:3)
     as_MonoClust(a)
   },
-  "as_MonoClust does not know how to handle object of class  list .")
+  "as_MonoClust does not know how to handle object of class list.")
 
   testthat::expect_error({
     b <- list(test = 1:3, y = 5)
