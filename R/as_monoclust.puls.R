@@ -34,8 +34,8 @@ as_MonoClust.PULS <- function(x, ...) {
                      "inertia_explained", "alt")
 
   if (any(is.na(match(required_cols, colnames(frame)))))
-    stop(paste("\"frame\" must have required columns. See PULS.object for",
-               "details."))
+    stop(strwrap("\"frame\" must have required columns. See PULS.object for
+                 details.", prefix = " ", initial = ""))
 
   # Add missing columns
   frame <-
