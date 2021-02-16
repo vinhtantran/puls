@@ -1,5 +1,5 @@
 ## Release summary
-A bug fix release to remove an unused packages in Imports.
+A bug fix release to remove a unit test that creates problem because of a change in warning message in monoClust.
 
 ## Test environments
 * local Windows 10 installation, R 4.0.3

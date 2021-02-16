@@ -8,10 +8,13 @@
   "description": "A method of clustering functional data using\n    subregion information of the curves. It is intended to supplement the\n    'fda' and 'fda.usc' packages in functional data object clustering. It\n    also facilitates the printing and plotting of the results in a tree\n    format and limits the partitioning candidates into a specific set of\n    subregions.",
   "name": "puls: Partitioning Using Local Subregions",
   "codeRepository": "https://github.com/vinhtantran/puls",
-  "relatedLink": ["https://vinhtantran.github.io/puls/", "https://CRAN.R-project.org/package=puls"],
+  "relatedLink": [
+    "https://vinhtantran.github.io/puls/",
+    "https://CRAN.R-project.org/package=puls"
+  ],
   "issueTracker": "https://github.com/vinhtantran/puls/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -267,7 +270,7 @@
     }
   ],
   "releaseNotes": "https://github.com/vinhtantran/puls/blob/master/NEWS.md",
-  "fileSize": "2180.173KB",
+  "fileSize": "2179.91KB",
   "contIntegration": ["https://codecov.io/gh/vinhtantran/puls?branch=master", "https://travis-ci.org/vinhtantran/puls"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": [
