@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   puls: puls.html
-last_built: 2025-04-20T23:32Z
+last_built: 2025-04-20T23:42Z
 urls:
   reference: https://vinhtantran.github.io/puls/reference
   article: https://vinhtantran.github.io/puls/articles
