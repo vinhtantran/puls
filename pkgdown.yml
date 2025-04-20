@@ -1,7 +1,9 @@
-pandoc: 2.7.3
-pkgdown: 1.6.1
+pandoc: 3.1.11
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   puls: puls.html
-last_built: 2021-02-22T00:30Z
-
+last_built: 2025-04-20T23:23Z
+urls:
+  reference: https://vinhtantran.github.io/puls/reference
+  article: https://vinhtantran.github.io/puls/articles
