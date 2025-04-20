@@ -15,6 +15,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Codecov test
 coverage](https://codecov.io/gh/vinhtantran/puls/branch/master/graph/badge.svg)](https://codecov.io/gh/vinhtantran/puls?branch=master)
 [![R-CMD-check](https://github.com/vinhtantran/puls/workflows/R-CMD-check/badge.svg)](https://github.com/vinhtantran/puls/actions)
+[![R-CMD-check](https://github.com/vinhtantran/puls/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/vinhtantran/puls/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Partitioning using local subregions (PULS) is a clustering technique
@@ -45,17 +46,20 @@ This is a basic example which shows you how to solve a common problem:
 library(puls)
 library(fda)
 #> Loading required package: splines
-#> Loading required package: Matrix
 #> Loading required package: fds
 #> Loading required package: rainbow
 #> Loading required package: MASS
 #> Loading required package: pcaPP
 #> Loading required package: RCurl
+#> Loading required package: deSolve
 #> 
 #> Attaching package: 'fda'
 #> The following object is masked from 'package:graphics':
 #> 
 #>     matplot
+#> The following object is masked from 'package:datasets':
+#> 
+#>     gait
 # Build a simple fd object from already smoothed smoothed_arctic
 data(smoothed_arctic)
 NBASIS <- 300
