@@ -2,7 +2,7 @@
 #'
 #' An implementation of the [monoClust::as_MonoClust()] S3 method for PULS
 #' object. The purpose of this is to reuse plotting and printing functions from
-#' [monoClust] package.
+#' [monoClust](https://cran.r-project.org/package=monoClust) package.
 #'
 #' @param x A PULS object to be coerced to MonoClust object.
 #' @param ... For extensibility.

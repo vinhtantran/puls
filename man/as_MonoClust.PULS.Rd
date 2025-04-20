@@ -17,7 +17,7 @@ A MonoClust object coerced from PULS object.
 \description{
 An implementation of the \code{\link[monoClust:as_MonoClust]{monoClust::as_MonoClust()}} S3 method for PULS
 object. The purpose of this is to reuse plotting and printing functions from
-\link{monoClust} package.
+\href{https://cran.r-project.org/package=monoClust}{monoClust} package.
 }
 \seealso{
 \link[monoClust:MonoClust.object]{monoClust::MonoClust.object} and \link{PULS.object}

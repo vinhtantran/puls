@@ -6,12 +6,7 @@
 \alias{puls-package}
 \title{puls: Partitioning Using Local Subregions}
 \description{
-A method of clustering functional data using
-    subregion information of the curves. It is intended to supplement the
-    'fda' and 'fda.usc' packages in functional data object clustering. It
-    also facilitates the printing and plotting of the results in a tree
-    format and limits the partitioning candidates into a specific set of
-    subregions.
+A method of clustering functional data using subregion information of the curves. It is intended to supplement the 'fda' and 'fda.usc' packages in functional data object clustering. It also facilitates the printing and plotting of the results in a tree format and limits the partitioning candidates into a specific set of subregions.
 }
 \seealso{
 Useful links:
