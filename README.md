@@ -12,9 +12,6 @@ downloads](https://cranlogs.r-pkg.org/badges/puls)](https://cran.r-project.org/p
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Codecov test
-coverage](https://codecov.io/gh/vinhtantran/puls/branch/master/graph/badge.svg)](https://codecov.io/gh/vinhtantran/puls?branch=master)
-[![R-CMD-check](https://github.com/vinhtantran/puls/workflows/R-CMD-check/badge.svg)](https://github.com/vinhtantran/puls/actions)
 [![R-CMD-check](https://github.com/vinhtantran/puls/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/vinhtantran/puls/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 

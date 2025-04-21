@@ -16,7 +16,7 @@ A data frame with 13391 rows and 6 variables:
 }
 }
 \source{
-\url{https://nsidc.org/data/G02135/versions/3}
+\url{https://nsidc.org/data/g02135/versions/3}
 }
 \usage{
 arctic_2019

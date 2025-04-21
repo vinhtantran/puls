@@ -12,7 +12,7 @@
 #'   \item{Missing}{Whether a day is missing (1) or not (0)).}
 #'   \item{Source Data}{data source in NOAA database.}
 #' }
-#' @source <https://nsidc.org/data/G02135/versions/3>
+#' @source <https://nsidc.org/data/g02135/versions/3>
 #' @examples
 #' library(dplyr)
 #' library(lubridate)
